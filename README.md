@@ -28,4 +28,4 @@ that the public test group may be cleaned out from time to time.
 ## Credits
 
 Originally developed by Nick Plante with help from various other
-[contributors](https://github.com/zapnap/knowflo/contributors).
+[contributors](https://github.com/knowflo/knowflo/graphs/contributors).
