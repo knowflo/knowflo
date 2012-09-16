@@ -1,0 +1,89 @@
+%header.jumbotron.subhead
+  %h1= "Questions in \"#{@group.name}\""
+  %p.lead
+    %span Showing the freshiest questions first,
+    %span= "page #{@questions.current_page} of #{@questions.num_pages}"
+
+.row
+  .span7
+    %ul.questions.unstyled
+      - if @questions.any?
+        - @questions.each do |question|
+          - recent = question.answers.order('updated_at DESC').first || question
+          %li
+            .question
+              .box
+                %a.pull-left.thumbnail{:href => user_path(question.user)}= image_tag(question.user.avatar_url(32), :width => 32, :height => 32)
+                .status.full
+                  %h4= link_to(question.subject, group_question_path(@group, question))
+                .clearfix
+                .author
+                  %span Created
+                  %span= time_ago_in_words(question.created_at)
+                  %span ago by
+                  %span= link_to(question.user.name, '#')
+                .activity
+                  - if question.answers.any?
+                    %em Last updated
+                    %em= time_ago_in_words(recent.updated_at)
+                    %em ago by
+                    %span= link_to(recent.user.name, '#')
+                  - else
+                    %em Awaiting answers &mdash; you could be the first!
+                .stats
+                  %span= link_to(pluralize(question.participants.size, 'user'), group_question_path(@group, question))
+                  %span /
+                  %span= link_to(pluralize(question.answers.size, 'answer'), group_question_path(@group, question))
+      - else
+        %li
+          %em Oh noes, there aren't any questions yet.
+        %li
+          = form_tag(new_group_question_path(@group), :method => 'GET') do
+            %button.btn.btn-primary{:type => 'submit'} Let's get this party started
+
+    .clearfix
+    = paginate(@questions)
+
+  .span3.rightsidebar
+    #group-details
+      %h3= "Group Name: #{@group.name}"
+      %dl
+        %dt Description
+        %dd= @group.description
+        %dt Activity ( moderate )
+        %dd
+          %span= pluralize(@questions.count, 'question')
+          %span with
+          %span= pluralize(@group.answers.count, 'answer')
+          %span since
+          %span= @group.created_at.strftime('%B %d, %Y')
+        %dt= "Participants ( #{@group.users.size} )"
+        %dd
+          %ul.unstyled.participants
+            - @group.users.limit(20).each do |user|
+              %li
+                = link_to(user_path(user)) do
+                  = image_tag(user.avatar_url(32), :width => 32, :height => 32)
+          = link_to("Show all users (#{@group.users.size})", '#') if @group.users.size > 20
+
+    - if logged_in? && @group.user_role(current_user)
+      #group-admin
+        %h3 Admin Options
+        #membership-add.modal.hide.fade{:style => 'display: none;'}
+          = simple_form_for(:membership, :url => group_memberships_path(@group), :html => { :class => 'form-horizontal' }) do |f|
+            .modal-header
+              %a.close{:'data-dismiss' => 'modal'} x
+              %h3 Invite Users
+            .modal-body
+              %p Invite your friends to this group! Or enemies. Or whomever you want, really. You're an admin, so you can do that.
+              .control-group
+                = f.input(:invitation_email, :label => 'Email')
+                = f.input(:role, :as => :select, :collection => Membership::ROLE_OPTIONS, :prompt => nil)
+            .modal-footer
+              %a.btn{:href => '#', :'data-dismiss' => 'modal'} Close
+              %button.btn.btn-primary{:type => 'submit'} Send invite
+        %ul.unstyled.admin
+          %li
+            = link_to('Invite New User', '#membership-add', :'data-toggle' => 'modal')
+
+    = render('groups/sidebar', :base => @group.questions, :new_path => new_group_question_path(@group))

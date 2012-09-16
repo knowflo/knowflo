@@ -1,0 +1,29 @@
+%header.jumbotron.subhead
+  %h1 Ask Questions, Get Answers
+  %p.lead Select from the list of groups here, or start your own.
+
+.row
+  .span7
+    - if logged_in?
+      %h3 Your Private Groups
+      %dl.my-groups.private.unstyled
+        - @groups.private_groups.each do |group|
+          %dt
+            %span= link_to(group.name, group_root_url(group))
+            %span= "[#{group.user_role(current_user)}]"
+          %dd= group.description
+
+      %h3 Public Groups
+
+    %dl.my-groups.public.unstyled
+      - @groups.public_groups.each do |group|
+        %dt
+          %span= link_to(group.name, group_root_url(group))
+          %span= "[#{group.user_role(current_user)}]" if logged_in?
+        %dd= group.description
+
+    = form_tag(new_group_url(:subdomain => false), :method => 'GET') do
+      %button.btn.btn-primary{:type => 'submit'} Create a new group
+
+  .span3.rightsidebar
+    = default_sidebar

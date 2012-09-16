@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Authentication Successful</title>
+  <script type="text/javascript">
+    if (window.opener) {
+      <% if @url.present? %>
+        window.opener.location = '<%= @url %>';
+      <% else %>
+        window.opener.location.reload(true);
+      <% end %>
+      window.close();
+    }
+  </script>
+</head>
+<body>
+</body>
+</html>

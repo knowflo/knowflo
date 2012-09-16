@@ -1,0 +1,16 @@
+%header.jumbotron.subhead
+  %h1 So you want to start a new group?
+  %p.lead Okay, sure. We can do that.
+
+.row
+  .span7
+    = simple_form_for(@group, :html => { :class => 'form-horizontal longform' }) do |f|
+      .control-group
+        = f.input(:name, :hint => "Example: Batman Fantasy Camp")
+        = f.input(:url, :label => 'Subdomain', :hint => "Example: If you enter 'batman' your URL will be batman.knowflo.info")
+        = f.input(:privacy, :as => :select, :collection => Group::PRIVACY_OPTIONS)
+        = f.input(:description, :input_html => { :rows => 5 })
+      .form-actions
+        %button.btn.btn-primary{:type => 'submit'} Create my group
+  .span3.rightsidebar
+    = default_sidebar

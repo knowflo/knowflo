@@ -1,0 +1,45 @@
+%header.jumbotron.subhead
+  %h1= @user.name
+  %p.lead is using Knowflo
+
+.row
+  .span7
+    .about
+      %a.pull-left.thumbnail{:href => '#'}
+        = image_tag(@user.avatar_url(64), :width => 64, :height => 64)
+      .description
+        - if logged_in? && current_user == @user
+          You haven't filled out any personal information yet. We'll give you the ability to do that soon.
+          You also need to be able to edit your photo. Also coming soon. Promise!
+        - else
+          %span= @user.first_name
+          hasn't filled out any personal information yet. Check back soon!
+    .clear
+
+    %h3= mine_or_yours(@user, 'Groups')
+    %ul.my-groups.unstyled
+      - @user.groups.each do |group|
+        - if group.visible_to(current_user)
+          %li= link_to(group.name, group_root_url(group))
+
+    %h3= mine_or_yours(@user, 'Recent Questions')
+    %ul.my-questions.unstyled
+      - @user.questions.limit(20).each do |question|
+        %li= link_to(question.subject, question_url(question, :subdomain => question.group))
+
+    %h3= mine_or_yours(@user, 'Recent Answers')
+    %ul.my-answers.unstyled
+      - @user.answers.limit(20).each do |answer|
+        %li= link_to(answer.question.subject, question_url(answer.question, :subdomain => answer.question.group))
+
+  .span3.rightsidebar
+    = render('groups/sidebar')
+
+:css
+  .about .thumbnail {
+    margin-right: 10px;
+  }
+  .about {
+    margin-bottom: 10px;
+    min-height: 80px;
+  }

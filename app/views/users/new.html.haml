@@ -1,0 +1,26 @@
+%header.jumbotron.subhead
+  %h1 New User? Sign up here.
+  %p.lead
+    Fill out this quickie l'il form or
+    = auth_popup_link(:facebook) do
+      %button.facebook{:type => 'submit'} Connect with Facebook
+
+.row
+  .span7
+    .well
+      = simple_form_for(@user, :html => { :class => 'form-horizontal' }) do |f|
+        .control-group
+          = f.input(:first_name)
+          = f.input(:last_name)
+          = f.input(:email)
+          = f.input(:password)
+          = f.input(:password_confirmation)
+        .form-actions
+          %button.btn.btn-primary{:type => 'submit'} Sign me up
+          %span or
+          = link_to('Login here', login_path)
+          %br
+          %br
+
+  .span3.rightsidebar
+    = default_sidebar

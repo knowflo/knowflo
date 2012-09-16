@@ -1,0 +1,28 @@
+- unless defined?(base) && base.present? && base.any?
+  - base = @group ? @group.try(:questions) : Question.public_questions
+- new_path ||= nil
+
+#recent
+  - questions = base.answered.recent.limit(10)
+  - if questions.any?
+    %h3 Recent Questions
+    %ul.recent.unstyled
+      - questions.each do |question|
+        %li= link_to(question.subject, question_url(question, :subdomain => question.group))
+
+#unanswered
+  - questions = base.unanswered.recent.limit(10)
+  - if questions.any?
+    %h3 Awaiting Answers
+    %ul.unanswered.unstyled
+      - questions.each do |question|
+        %li= link_to(question.subject, question_url(question, :subdomain => question.group))
+
+- if new_path
+  #new-question
+    %ul.other.unstyled
+      %li
+        = form_tag(new_question_url(:subdomain => @group || false), :method => 'GET') do
+          %button.btn.btn-primary{:type => 'submit'} Ask a new question
+
+

@@ -1,0 +1,354 @@
+@import "bootstrap/mixins";
+
+body {
+  padding-top: 60px;
+}
+
+.container.main {
+  min-height: 300px;
+}
+
+button.facebook {
+  background: url(/assets/facebook_signin.png) top;
+  width: 150px;
+  height: 24px;
+  overflow: hidden;
+  text-indent: -1000px;
+  border: 0;
+
+  &:hover {
+    background-position: 0 24px;
+  }
+
+  &:active {
+    background-position: 0 48px;
+  }
+}
+
+ul {
+  &.inline {
+    li {
+      display: inline;
+      margin-right: 8px;
+    }
+  }
+}
+
+.footer {
+  border-top: 1px solid #EEE;
+  padding-top: 20px;
+
+  p {
+    margin: 0 0 9px;
+  }
+}
+
+aside {
+  position: relative;
+}
+
+#sidebar {
+  width: 100%;
+  position: absolute;
+  top: 0;
+
+  .logo {
+    text-align: center;
+    margin-bottom: 10px;
+    display: block;
+  }
+
+  .floating {
+    position: absolute;
+    top: 0;
+  }
+}
+
+#question {
+}
+
+#answers {
+  margin-bottom: 20px;
+
+  ul.answers {
+    margin-top: 10px;
+    border-top: 2px solid #CCC;
+  }
+}
+
+.question {
+  .box .status {
+    background: #f0f8f8 !important;
+  }
+}
+
+.answer, .question {
+  position: relative;
+  margin-bottom: 10px;
+
+  .thumbnail {
+    background: #FFF;
+  }
+
+  .about {
+    font-size: 12px;
+
+    .thumbnail {
+      float: left;
+      margin: 0 10px 10px 0;
+    }
+
+    p {
+      font-size: 12px;
+    }
+  }
+
+  .box {
+    .status {
+      padding: 10px 5px 5px 80px;
+      background: #EEE;
+      display: block;
+      border-top: 1px solid #DDD;
+      border-bottom: 1px solid #DDD;
+      line-height: 25px;
+
+      &.full {
+        padding-left: 50px;
+      }
+
+      h3, h4 {
+        line-height: 25px;
+      }
+
+      form {
+        margin: 0;
+        padding: 0;
+      }
+    }
+
+    .bodytext {
+      padding: 10px 0 20px;
+      word-wrap: break-word;
+    }
+
+    .solution {
+      margin: 10px 0;
+      padding: 5px 10px;
+      background: #08C;
+      color: #EEE;
+      font-style: italic;
+      border-top: 1px solid #DDD;
+      border-bottom: 1px solid #DDD;
+    }
+
+    .vote {
+      font-size: 13px;
+      margin: 0;
+      padding: 0;
+      background: #FFF;
+
+      .up, .down {
+        display: block;
+        background: #08C;
+        padding: 0 5px;
+        margin-right: 5px;
+        overflow: hidden;
+        @include border-radius(5px);
+        border: 1px solid #DDD;
+
+        &.disabled {
+          background: #EEE !important;
+        }
+
+        &.active {
+          background: #005580;
+        }
+
+        &:hover {
+          text-decoration: none;
+          background: #005580;
+        }
+      }
+
+      .down {
+        margin-top: 2px;
+      }
+    }
+  }
+}
+
+.answer {
+  padding-top: 20px;
+
+  .actions {
+    border-top: 1px solid #DDD;
+    padding: 5px 0 5px 10px;
+  }
+
+  .comments {
+    display: none;
+    margin-top: 10px;
+  }
+
+  form.comment, form.new_comment {
+    margin: 0;
+  }
+
+  .comment .wysiwyg, .comment textarea {
+    width: 510px;
+  }
+
+  .points {
+    background: #08C;
+    color: #FFF;
+    padding: 0 8px;
+    margin-right: 5px;
+    margin-top: -3px;
+    @include border-radius(5px);
+    border: 1px solid #DDD;
+    height: 25px;
+  }
+
+  .mark {
+    background: #005580;
+    color: #FFF;
+    padding: 0 8px;
+    margin-right: 5px;
+    margin-top: -3px;
+    @include border-radius(5px);
+    border: 1px solid #DDD;
+    height: 25px;
+
+    &.interactive {
+      background: #999;
+
+      &.active {
+        background: #08C;
+      }
+
+      &:hover {
+        background: #005580;
+      }
+    }
+  }
+}
+
+#add-answer {
+  margin-bottom: 20px;
+}
+
+#question .wysiwyg, #add-answer textarea, #add-answer .controls .wysiwyg, .answer .wysiwyg {
+  width: 520px;
+}
+
+li.comment {
+  margin-bottom: 10px;
+  border-bottom: 1px solid #EEE;
+  font-size: 12px;
+
+  &.new-comment {
+    border-bottom: none;
+  }
+
+  .box {
+    .bodytext {
+      padding: 5px 0 10px;
+
+      p {
+        font-size: 12px;
+      }
+    }
+  }
+}
+
+.qheader {
+  margin-bottom: 10px;
+  margin-right: 240px;
+}
+
+.control-group.hidden {
+  display: none;
+}
+
+.longform {
+  input, textarea, select {
+    width: 300px;
+  }
+
+  .form-actions {
+    background: transparent;
+  }
+}
+
+ul.participants {
+  margin-bottom: 0;
+
+  li {
+    display: inline-block;
+    margin: 0;
+
+    a {
+      margin: 0;
+      padding: 0;
+
+      img {
+        border: 2px solid #DDD;
+        @include border-radius(2px);
+
+        &:hover {
+          border: 2px solid #08C;
+        }
+      }
+    }
+  }
+}
+
+ul.questions {
+  li {
+    margin-bottom: 20px;
+
+    .status {
+      margin-bottom: 10px;
+    }
+  }
+}
+
+dd {
+  margin-bottom: 5px;
+}
+
+.rightsidebar {
+  margin-bottom: 10px;
+
+  ul {
+    margin-bottom: 20px;
+  }
+}
+
+.modal {
+  form {
+    margin: 0;
+    padding: 0;
+  }
+}
+
+.highlight {
+  background: #ffe;
+  position: relative;
+  cursor: pointer;
+
+  .prompt {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 3px 5px;
+    background: #08c;
+    color: #fff;
+    cursor: pointer;
+    @include border-radius(5px);
+  }
+}
+
+.hidden {
+  display: none;
+}

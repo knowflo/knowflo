@@ -1,0 +1,75 @@
+!!! 5
+%html{:lang => 'en'}
+  %head
+    %title= Settings.app_name
+    = stylesheet_link_tag    "application", :media => "all"
+    = csrf_meta_tags
+    - # %link{:rel => 'shortcut icon', :href => 'assets/favicon.ico'}
+    = yield :head
+
+  %body
+    .navbar.navbar-fixed-top
+      .navbar-inner
+        .container
+          %a.brand{:href => root_url(:subdomain => false)} knowflo
+          %ul.nav.mainnav
+            = nav_link('About', about_url(:subdomain => false))
+            = nav_link('Contact', contact_url(:subdomain => false))
+          %form.navbar-search.pull-right
+            %input.search-query.span3{:type => 'text', :placeholder => 'Search'}
+
+    - if notice = render_flash
+      .container
+        = raw notice
+
+    .container.main
+      .row
+        %aside.span2
+          #sidebar
+            .floating
+              - if @group && @group.logo_url.present?
+                = link_to(root_path, :class => 'logo') do
+                  = image_tag(@group.logo_url, :width => 120, :height => 120)
+              - else
+                = link_to(root_url(:subdomain => false), :class => 'logo') do
+                  = image_tag(asset_path('knowflo_logo_120.png'), :width => 120, :height => 120)
+              %ul.nav.nav-tabs.nav-stacked
+                - if logged_in?
+                  %li= link_to('My Account', user_path(current_user))
+                  %li= link_to('My Groups', groups_url(:subdomain => false))
+                  %li= link_to('New Question', new_question_path)
+                  %li= link_to('Logout', logout_path)
+                - else
+                  %li= nav_link('All Groups', groups_url(:subdomain => false))
+                  %li= nav_link('Signup', signup_path)
+                  %li= nav_link('Login', login_path)
+          %br
+        .span10
+          = yield
+
+    .container
+      %footer.footer
+        .row
+          .span6
+            %p
+              %ul.unstyled.inline
+                %li= link_to('Home', root_url(:subdomain => false))
+                %li= link_to('About Us', about_url(:subdomain => false))
+                %li= link_to('Contact', contact_url(:subdomain => false))
+                %li= link_to('Terms of Service', terms_url(:subdomain => false))
+                %li= link_to('Privacy Policy', privacy_url(:subdomain => false))
+            %p
+              knowflo is a simple way to ask and answer questions.
+              On the Internet. It isn't rocket science. Created by
+              = link_to('@zapnap', 'http://twitter.com/zapnap')
+              and friends.
+            %p
+              &copy;
+              = "#{Time.now.year} zerosum labs"
+          .span6
+            %p.pull-right= link_to('Back to top', '#')
+
+    = javascript_include_tag "application"
+    = yield :javascript
+
+    = render :partial => 'shared/analytics' if Rails.env.production?

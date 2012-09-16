@@ -1,0 +1,21 @@
+%header.jumbotron.subhead
+  %h1 Hello there, so nice to see you again.
+  %p.lead
+    Login with your email and password below, or
+    = auth_popup_link(:facebook) do
+      %button.facebook{:type => 'submit'} Connect with Facebook
+
+.row
+  .span7
+    .well
+      = simple_form_for(:user, :url => sessions_path, :html => { :class => 'form-horizontal' }) do |f|
+        .control-group
+          = f.input(:email)
+          = f.input(:password)
+        .form-actions
+          %button.btn.btn-primary{:type => 'submit'} Login
+          %span or
+          %span= link_to('Sign up', signup_path)
+
+  .span3.rightsidebar
+    = default_sidebar

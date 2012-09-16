@@ -1,0 +1,16 @@
+Hey there,
+
+<% if @group.welcome_message.present? %>
+<%= @group.welcome_message %>
+<% else %>
+<% if @membership.invited_by_user %>
+<%= @membership.invited_by_user.name %> has invited you to the group <%= @membership.group.name %> on Knowflo.
+<% else %>
+You've been invited to the group <%= @membership.group.name %> on Knowflo.
+<% end %>
+Knowflo is an easy way to ask and answer questions with a group of your peers. We hope you find it useful!
+<% end %>
+
+To accept this invitation and join the <%= @membership.group.name %> group, just follow this link:
+
+<%= accept_membership_url(@membership.token, :subdomain => @membership.group) %>
