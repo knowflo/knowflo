@@ -1,11 +1,11 @@
-%header.jumbotron.subhead
+%header.page-header.subhead
   %h1= "Questions in \"#{@group.name}\""
   %p.lead
     %span Showing the freshiest questions first,
     %span= "page #{@questions.current_page} of #{@questions.num_pages}"
 
 .row
-  .span7
+  .col-md-7
     %ul.questions.unstyled
       - if @questions.any?
         - @questions.each do |question|
@@ -44,7 +44,7 @@
     .clearfix
     = paginate(@questions)
 
-  .span3.rightsidebar
+  .col-md-3.rightsidebar
     #group-details
       %h3= "Group Name: #{@group.name}"
       %dl

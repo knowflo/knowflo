@@ -13,7 +13,7 @@ gem 'foreman'
 gem 'thin'
 
 # assets
-# gem 'bootstrap-sass'
+gem 'bootstrap-sass'
 gem 'jquery-rails'
 
 group :development, :test do

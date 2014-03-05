@@ -42,6 +42,8 @@ GEM
     arel (3.0.3)
     awesome_print (1.2.0)
     bcrypt-ruby (3.0.1)
+    bootstrap-sass (3.1.1.0)
+      sass (~> 3.2)
     builder (3.0.4)
     capybara (2.2.1)
       mime-types (>= 1.16)
@@ -284,6 +286,7 @@ PLATFORMS
 DEPENDENCIES
   awesome_print
   bcrypt-ruby (~> 3.0.0)
+  bootstrap-sass
   capybara
   coffee-rails
   configuration

@@ -8,15 +8,22 @@
     = yield :head
 
   %body
-    .navbar.navbar-fixed-top
-      .navbar-inner
-        .container
-          %a.brand{:href => root_url(:subdomain => false)} knowflo
-          %ul.nav.mainnav
-            = nav_link('About', about_url(:subdomain => false))
-            = nav_link('Contact', contact_url(:subdomain => false))
-          %form.navbar-search.pull-right
-            %input.search-query.span3{:type => 'text', :placeholder => 'Search'}
+    %header.navbar.navbar-inverse.navbar-fixed-top
+      .container
+        .navbar-header
+          %a.navbar-brand{href: root_url(subdomain: false)} knowflo
+
+        %nav{role: 'navigation'}
+          %ul.nav.navbar-nav.mainnav
+            = nav_link('About', about_url(subdomain: false))
+            = nav_link('Contact', contact_url(subdomain: false))
+          .col-md-3.navbar-right
+            %form.navbar-search.navbar-form
+              .input-group
+                %input.form-control.search-query{type: 'text', placeholder: 'Search'}
+                %span.input-group-btn
+                  %button.btn.btn-default{type: 'button'}
+                    %span.glyphicon.glyphicon-search
 
     - if notice = render_flash
       .container
@@ -24,7 +31,7 @@
 
     .container.main
       .row
-        %aside.span2
+        %aside.col-md-2
           #sidebar
             .floating
               - if @group && @group.logo_url.present?
@@ -33,7 +40,7 @@
               - else
                 = link_to(root_url(:subdomain => false), :class => 'logo') do
                   = image_tag(asset_path('knowflo_logo_120.png'), :width => 120, :height => 120)
-              %ul.nav.nav-tabs.nav-stacked
+              %ul.nav.nav-pills.nav-stacked
                 - if logged_in?
                   %li= link_to('My Account', user_path(current_user))
                   %li= link_to('My Groups', groups_url(:subdomain => false))
@@ -44,15 +51,15 @@
                   %li= nav_link('Signup', signup_path)
                   %li= nav_link('Login', login_path)
           %br
-        .span10
+        .col-md-10
           = yield
 
     .container
       %footer.footer
         .row
-          .span6
+          .col-md-6
             %p
-              %ul.unstyled.inline
+              %ul.inline
                 %li= link_to('Home', root_url(:subdomain => false))
                 %li= link_to('About Us', about_url(:subdomain => false))
                 %li= link_to('Contact', contact_url(:subdomain => false))
@@ -66,7 +73,7 @@
             %p
               &copy;
               = "#{Time.now.year} zerosum labs"
-          .span6
+          .col-md-6
             %p.pull-right= link_to('Back to top', '#')
 
     = javascript_include_tag "application"

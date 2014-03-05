@@ -1,9 +1,9 @@
-%header.jumbotron.subhead
+%header.page-header.subhead
   %h1 So you want to start a new group?
   %p.lead Okay, sure. We can do that.
 
 .row
-  .span7
+  .col-md-7
     = simple_form_for(@group, :html => { :class => 'form-horizontal longform' }) do |f|
       .control-group
         = f.input(:name, :hint => "Example: Batman Fantasy Camp")
@@ -12,5 +12,5 @@
         = f.input(:description, :input_html => { :rows => 5 })
       .form-actions
         %button.btn.btn-primary{:type => 'submit'} Create my group
-  .span3.rightsidebar
+  .col-md-3.rightsidebar
     = default_sidebar

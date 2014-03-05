@@ -5,7 +5,7 @@ module ApplicationHelper
 
   def render_flash
     if message = flash[:error]
-      div_class = 'error'
+      div_class = 'danger'
       div_title = 'Oh noes!'
     elsif message = flash[:success]
       div_class = 'success'

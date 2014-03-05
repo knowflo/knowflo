@@ -1,12 +1,12 @@
 - content_for(:javascript) do
   = javascript_include_tag(:questions)
 
-.jumbotron.qheader
+%header.page-header.qheader
   %h1= @question.subject
 
 .container
   .row
-    .span7
+    .col-md-7
       #question.question
         .box
           %a.pull-left.thumbnail{:href => user_path(@question.user)}
@@ -135,7 +135,7 @@
             %span= link_to('sign up', signup_path)
             %span to participate.
 
-    .span3.rightsidebar
+    .col-md-3.rightsidebar
       - if owner_logged_in?(@question)
         %ul.unstyled.other
           %li
@@ -143,11 +143,3 @@
               %button.btn.btn-danger{:type => 'submit'} Delete question
 
       = render('groups/sidebar', :base => @group.questions, :new_path => new_question_url(:subdomain => @group))
--#
-  :javascript
-    $(function() {
-      window.router = new Knowflo.Routers.MessagesRouter({
-        messages: #{@message_thread.messages.to_json.html_safe }});
-      Backbone.history.start();
-    });
-

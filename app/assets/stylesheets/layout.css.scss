@@ -1,11 +1,10 @@
-@import "bootstrap/mixins";
-
 body {
   padding-top: 60px;
 }
 
 .container.main {
   min-height: 300px;
+  padding-bottom: 20px;
 }
 
 button.facebook {
@@ -14,6 +13,7 @@ button.facebook {
   height: 24px;
   overflow: hidden;
   text-indent: -1000px;
+  line-height: 10px;
   border: 0;
 
   &:hover {
@@ -27,6 +27,9 @@ button.facebook {
 
 ul {
   &.inline {
+    margin-left: 0;
+    padding-left: 0;
+
     li {
       display: inline;
       margin-right: 8px;
@@ -153,7 +156,7 @@ aside {
         padding: 0 5px;
         margin-right: 5px;
         overflow: hidden;
-        @include border-radius(5px);
+        border-radius: 5px;
         border: 1px solid #DDD;
 
         &.disabled {
@@ -204,7 +207,7 @@ aside {
     padding: 0 8px;
     margin-right: 5px;
     margin-top: -3px;
-    @include border-radius(5px);
+    border-radius: 5px;
     border: 1px solid #DDD;
     height: 25px;
   }
@@ -215,7 +218,7 @@ aside {
     padding: 0 8px;
     margin-right: 5px;
     margin-top: -3px;
-    @include border-radius(5px);
+    border-radius: 5px;
     border: 1px solid #DDD;
     height: 25px;
 
@@ -293,7 +296,7 @@ ul.participants {
 
       img {
         border: 2px solid #DDD;
-        @include border-radius(2px);
+        border-radius: 2px;
 
         &:hover {
           border: 2px solid #08C;
@@ -345,10 +348,18 @@ dd {
     background: #08c;
     color: #fff;
     cursor: pointer;
-    @include border-radius(5px);
+    border-radius: 5px;
   }
 }
 
 .hidden {
   display: none;
+}
+
+.form-box {
+  background-color: #fafafa;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 20px;
+  margin-bottom: 10px;
 }
