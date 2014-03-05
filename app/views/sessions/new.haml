@@ -6,7 +6,7 @@
       %button.facebook{:type => 'submit'} Connect with Facebook
 
 .row
-  .col-md-7
+  .col-md-8
     .form-box
       = simple_form_for(:user, :url => sessions_path) do |f|
         .control-group
@@ -17,5 +17,5 @@
           %span or
           %span= link_to('Sign up', signup_path)
 
-  .col-md-3.rightsidebar
+  .col-md-4.rightsidebar
     = default_sidebar

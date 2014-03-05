@@ -5,7 +5,7 @@
     %span= "page #{@questions.current_page} of #{@questions.num_pages}"
 
 .row
-  .col-md-7
+  .col-md-8
     %ul.questions.unstyled
       - if @questions.any?
         - @questions.each do |question|
@@ -44,7 +44,7 @@
     .clearfix
     = paginate(@questions)
 
-  .col-md-3.rightsidebar
+  .col-md-4.rightsidebar
     #group-details
       %h3= "Group Name: #{@group.name}"
       %dl

@@ -4,7 +4,7 @@
 
 = simple_form_for(@question) do |f|
   .row
-    .col-md-7
+    .col-md-8
       .form-group
         = f.input(:subject, label: 'Question', hint: "e.g. What you gon' do with all that junk?")
         = f.input(:group_id, as: :select, collection: Group.visible(current_user).map { |g| [g.name, g.id] }, input_html: { value: @group.try(:id) }, prompt: nil)
@@ -12,5 +12,5 @@
       .form-actions
         %button.btn.btn-primary{type: 'submit'} Create Question
 
-    .col-md-3
+    .col-md-4
       = render('groups/sidebar', base: @group ? @group.questions : Question, new_path: false)

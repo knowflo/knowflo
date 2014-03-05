@@ -3,7 +3,7 @@
   %p.lead Select from the list of groups here, or start your own.
 
 .row
-  .col-md-7
+  .col-md-8
     - if logged_in?
       %h3 Your Private Groups
       %dl.my-groups.private.unstyled
@@ -25,5 +25,5 @@
     = form_tag(new_group_url(:subdomain => false), :method => 'GET') do
       %button.btn.btn-primary{:type => 'submit'} Create a new group
 
-  .col-md-3.rightsidebar
+  .col-md-4.rightsidebar
     = default_sidebar

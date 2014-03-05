@@ -3,7 +3,7 @@
   %p.lead is using Knowflo
 
 .row
-  .col-md-7
+  .col-md-8
     .about
       %a.pull-left.thumbnail{:href => '#'}
         = image_tag(@user.avatar_url(64), :width => 64, :height => 64)
@@ -32,7 +32,7 @@
       - @user.answers.limit(20).each do |answer|
         %li= link_to(answer.question.subject, question_url(answer.question, :subdomain => answer.question.group))
 
-  .col-md-3.rightsidebar
+  .col-md-4.rightsidebar
     = render('groups/sidebar')
 
 :css

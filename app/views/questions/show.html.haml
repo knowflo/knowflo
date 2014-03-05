@@ -4,142 +4,141 @@
 %header.page-header.qheader
   %h1= @question.subject
 
-.container
-  .row
-    .col-md-7
-      #question.question
-        .box
-          %a.pull-left.thumbnail{:href => user_path(@question.user)}
-            = image_tag(@question.user.avatar_url(32), :width => 32, :height => 32)
-          .status.full
-            %span created
-            %span= time_ago_in_words(@question.created_at)
-            %span ago by
-            %span= link_to(@question.user.name, user_path(@question.user))
-            - if @question.updated_at > @question.created_at + 1.minute
-              %span= "(updated #{time_ago_in_words(@question.updated_at)} ago)"
+.row
+  .col-md-8
+    #question.question
+      .box
+        %a.pull-left.thumbnail{:href => user_path(@question.user)}
+          = image_tag(@question.user.avatar_url(32), :width => 32, :height => 32)
+        .status.full
+          %span created
+          %span= time_ago_in_words(@question.created_at)
+          %span ago by
+          %span= link_to(@question.user.name, user_path(@question.user))
+          - if @question.updated_at > @question.created_at + 1.minute
+            %span= "(updated #{time_ago_in_words(@question.updated_at)} ago)"
 
-          .clearfix
-          .bodytext
-            - if owner_logged_in?(@question)
-              .hidden.editable
-                = simple_form_for([@group, @question]) do |f|
-                  = f.input(:body, :as => :text, :label => false, :input_html => { :rows => 5, :class => 'wysiwyg' })
-                  = f.submit('Update', :class => 'btn btn-inverse')
-                  %button.btn.btn-default.cancel Cancel
-            .content
-              - if @question.body.empty? && owner_logged_in?(@question)
-                %em Add description
-              - else
-                = post_format(@question.body)
-          .clearfix
+        .clearfix
+        .bodytext
+          - if owner_logged_in?(@question)
+            .hidden.editable
+              = simple_form_for([@group, @question]) do |f|
+                = f.input(:body, :as => :text, :label => false, :input_html => { :rows => 5, :class => 'wysiwyg' })
+                = f.submit('Update', :class => 'btn btn-inverse')
+                %button.btn.btn-default.cancel Cancel
+          .content
+            - if @question.body.empty? && owner_logged_in?(@question)
+              %em Add description
+            - else
+              = post_format(@question.body)
+        .clearfix
 
-      #answers
-        %h3
-          - if @question.answers.any?
-            = pluralize(@question.answers.size, 'Answers')
-          - else
-            Awaiting Answers
-        %ul.unstyled.answers
-          - @question.answers.each do |answer|
-            %li.answer{:id => "answer-#{answer.id}"}
-              .box
-                .pull-left
-                  .vote{:'data-url' => vote_group_answer_path(@group, answer)}
-                    %a.up{:href => '#', :'data-value' => 1, :class => upvote_class(answer)}
-                      %span.glyphicon.glyphicon-chevron-up
-                    %a.down{:href => '#', :'data-value' => -1, :class => downvote_class(answer)}
-                      %span.glyphicon.glyphicon-chevron-down
-                %a.pull-left.thumbnail{:href => user_path(answer.user)}= image_tag(answer.user.avatar_url(32), :width => 32, :height => 32)
-                .status
-                  .points.pull-right= answer.points
-                  - if logged_in? && @question.user == current_user
-                    = form_tag(mark_group_answer_path(@group, answer)) do
-                      = link_to('#', :title => 'Mark this solution as correct', :class => 'accept-answer') do
-                        .mark.pull-right.interactive{:class => answer.accepted? ? 'active' : ''}
-                          %span.glyphicon.glyphicon-ok
-                  - elsif answer.accepted?
-                    .mark.pull-right
-                      %span.glyphicon.glyphicon-ok
-
-                  %span answered
-                  %span= "#{time_ago_in_words(answer.created_at)} ago by"
-                  %span= link_to(answer.user.name, user_path(answer.user))
-                  - if answer.updated_at > answer.created_at + 1.minute
-                    %em (updated)
-
-                .clearfix
-                - if answer.accepted?
-                  .solution
-                    This answer was marked as correct.
-                .bodytext
-                  - if owner_logged_in?(answer)
-                    .hidden.editable
-                      = simple_form_for([@group, answer]) do |f|
-                        = f.input(:body, :as => :text, :label => false, :input_html => { :rows => 3, :class => 'wysiwyg' })
-                        = f.submit('Update', :class => 'btn btn-inverse')
-                        %button.btn.btn-default.cancel Cancel
-                  .content= post_format(answer.body)
-                .clearfix
-
-                .actions
-                  - if answer.comments.any?
-                    = link_to(pluralize(answer.comments.size, 'Comment'), '#', :class => 'add-comment')
-                  - else
-                    = link_to('Comment', '#', :class => 'add-comment')
-
-                  %ul.unstyled.comments
-                    - answer.comments.each do |comment|
-                      %li.comment{:id => "comment-#{comment.id}"}
-                        .box
-                          .bodytext
-                            - if owner_logged_in?(comment)
-                              .hidden.editable
-                                = simple_form_for([@group, comment]) do |f|
-                                  = f.input(:body, :as => :text, :label => false, :input_html => { :rows => 2, :class => 'wysiwyg' })
-                                  = f.submit('Update', :class => 'btn btn-inverse')
-                                  %button.btn.btn-default.cancel Cancel
-                            .content= comment_format(comment)
-                          .clearfix
-
-                    - if logged_in?
-                      %li.comment.new-comment
-                        .box
-                          .bodytext
-                            - comment = answer.comments.build
-                            = simple_form_for([@group, comment]) do |f|
-                              = f.input(:answer_id, :as => :hidden, :input_html => { :value => answer.id })
-                              = f.input(:body, :as => :text, :label => false, :input_html => { :rows => 2, :placeholder => 'Your comment', :class => 'wysiwyg' })
-                              = f.submit('Add Comment', :class => 'btn btn-default')
-                          .clearfix
-                    - else
-                      %li.comment.new-comment
-                        %span Please
-                        %span= link_to('login', login_path)
-                        %span to comment
-
-      #add-answer
-        - if logged_in?
-          %h3 Your Answer
-          .forms
-            - answer = @question.answers.build
-            = simple_form_for([@group, answer]) do |f|
-              = f.input(:body, :label => false, :input_html => { :rows => 3, :class => 'wysiwyg' })
-              = f.input(:question_id, :as => :hidden, :input_html => { :value => @question.id })
-              = f.submit('Add Answer', :class => 'btn btn-default')
+    #answers
+      %h3
+        - if @question.answers.any?
+          = pluralize(@question.answers.size, 'Answers')
         - else
-          %h4
-            %span= "Got an answer for #{@question.user.first_name}? Please"
-            %span= link_to('login', login_path)
-            %span or
-            %span= link_to('sign up', signup_path)
-            %span to participate.
+          Awaiting Answers
+      %ul.unstyled.answers
+        - @question.answers.each do |answer|
+          %li.answer{:id => "answer-#{answer.id}"}
+            .box
+              .pull-left
+                .vote{:'data-url' => vote_group_answer_path(@group, answer)}
+                  %a.up{:href => '#', :'data-value' => 1, :class => upvote_class(answer)}
+                    %span.glyphicon.glyphicon-chevron-up
+                  %a.down{:href => '#', :'data-value' => -1, :class => downvote_class(answer)}
+                    %span.glyphicon.glyphicon-chevron-down
+              %a.pull-left.thumbnail{:href => user_path(answer.user)}= image_tag(answer.user.avatar_url(32), :width => 32, :height => 32)
+              .status
+                .points.pull-right= answer.points
+                - if logged_in? && @question.user == current_user
+                  = form_tag(mark_group_answer_path(@group, answer)) do
+                    = link_to('#', :title => 'Mark this solution as correct', :class => 'accept-answer') do
+                      .mark.pull-right.interactive{:class => answer.accepted? ? 'active' : ''}
+                        %span.glyphicon.glyphicon-ok
+                - elsif answer.accepted?
+                  .mark.pull-right
+                    %span.glyphicon.glyphicon-ok
 
-    .col-md-3.rightsidebar
-      - if owner_logged_in?(@question)
-        %ul.unstyled.other
-          %li
-            = form_tag(group_question_path(@group, @question), :method => 'DELETE') do
-              %button.btn.btn-danger{:type => 'submit'} Delete question
+                %span answered
+                %span= "#{time_ago_in_words(answer.created_at)} ago by"
+                %span= link_to(answer.user.name, user_path(answer.user))
+                - if answer.updated_at > answer.created_at + 1.minute
+                  %em (updated)
 
-      = render('groups/sidebar', :base => @group.questions, :new_path => new_question_url(:subdomain => @group))
+              .clearfix
+              - if answer.accepted?
+                .solution
+                  This answer was marked as correct.
+              .bodytext
+                - if owner_logged_in?(answer)
+                  .hidden.editable
+                    = simple_form_for([@group, answer]) do |f|
+                      = f.input(:body, :as => :text, :label => false, :input_html => { :rows => 3, :class => 'wysiwyg' })
+                      = f.submit('Update', :class => 'btn btn-inverse')
+                      %button.btn.btn-default.cancel Cancel
+                .content= post_format(answer.body)
+              .clearfix
+
+              .actions
+                - if answer.comments.any?
+                  = link_to(pluralize(answer.comments.size, 'Comment'), '#', :class => 'add-comment')
+                - else
+                  = link_to('Comment', '#', :class => 'add-comment')
+
+                %ul.unstyled.comments
+                  - answer.comments.each do |comment|
+                    %li.comment{:id => "comment-#{comment.id}"}
+                      .box
+                        .bodytext
+                          - if owner_logged_in?(comment)
+                            .hidden.editable
+                              = simple_form_for([@group, comment]) do |f|
+                                = f.input(:body, :as => :text, :label => false, :input_html => { :rows => 2, :class => 'wysiwyg' })
+                                = f.submit('Update', :class => 'btn btn-inverse')
+                                %button.btn.btn-default.cancel Cancel
+                          .content= comment_format(comment)
+                        .clearfix
+
+                  - if logged_in?
+                    %li.comment.new-comment
+                      .box
+                        .bodytext
+                          - comment = answer.comments.build
+                          = simple_form_for([@group, comment]) do |f|
+                            = f.input(:answer_id, :as => :hidden, :input_html => { :value => answer.id })
+                            = f.input(:body, :as => :text, :label => false, :input_html => { :rows => 2, :placeholder => 'Your comment', :class => 'wysiwyg' })
+                            = f.submit('Add Comment', :class => 'btn btn-default')
+                        .clearfix
+                  - else
+                    %li.comment.new-comment
+                      %span Please
+                      %span= link_to('login', login_path)
+                      %span to comment
+
+    #add-answer
+      - if logged_in?
+        %h3 Your Answer
+        .forms
+          - answer = @question.answers.build
+          = simple_form_for([@group, answer]) do |f|
+            = f.input(:body, :label => false, :input_html => { :rows => 3, :class => 'wysiwyg' })
+            = f.input(:question_id, :as => :hidden, :input_html => { :value => @question.id })
+            = f.submit('Add Answer', :class => 'btn btn-default')
+      - else
+        %h4
+          %span= "Got an answer for #{@question.user.first_name}? Please"
+          %span= link_to('login', login_path)
+          %span or
+          %span= link_to('sign up', signup_path)
+          %span to participate.
+
+  .col-md-4.rightsidebar
+    - if owner_logged_in?(@question)
+      %ul.unstyled.other
+        %li
+          = form_tag(group_question_path(@group, @question), :method => 'DELETE') do
+            %button.btn.btn-danger{:type => 'submit'} Delete question
+
+    = render('groups/sidebar', :base => @group.questions, :new_path => new_question_url(:subdomain => @group))
