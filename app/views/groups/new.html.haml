@@ -4,13 +4,13 @@
 
 .row
   .col-md-7
-    = simple_form_for(@group, :html => { :class => 'form-horizontal longform' }) do |f|
+    = simple_form_for(@group) do |f|
       .control-group
-        = f.input(:name, :hint => "Example: Batman Fantasy Camp")
-        = f.input(:url, :label => 'Subdomain', :hint => "Example: If you enter 'batman' your URL will be batman.knowflo.info")
-        = f.input(:privacy, :as => :select, :collection => Group::PRIVACY_OPTIONS)
-        = f.input(:description, :input_html => { :rows => 5 })
+        = f.input(:name, hint: "Example: Batman Fantasy Camp")
+        = f.input(:url, as: :string, label: 'Subdomain', hint: "Example: If you enter 'batman' your URL will be batman.knowflo.info")
+        = f.input(:privacy, as: :select, collection: Group::PRIVACY_OPTIONS)
+        = f.input(:description, input_html: { rows: 5 })
       .form-actions
-        %button.btn.btn-primary{:type => 'submit'} Create my group
+        %button.btn.btn-primary{type: 'submit'} Create my group
   .col-md-3.rightsidebar
     = default_sidebar

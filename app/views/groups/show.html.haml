@@ -13,7 +13,7 @@
           %li
             .question
               .box
-                %a.pull-left.thumbnail{:href => user_path(question.user)}= image_tag(question.user.avatar_url(32), :width => 32, :height => 32)
+                %a.pull-left.thumbnail{href: user_path(question.user)}= image_tag(question.user.avatar_url(32), width: 32, height: 32)
                 .status.full
                   %h4= link_to(question.subject, group_question_path(@group, question))
                 .clearfix
@@ -38,8 +38,8 @@
         %li
           %em Oh noes, there aren't any questions yet.
         %li
-          = form_tag(new_group_question_path(@group), :method => 'GET') do
-            %button.btn.btn-primary{:type => 'submit'} Let's get this party started
+          = form_tag(new_group_question_path(@group), method: 'GET') do
+            %button.btn.btn-primary{type: 'submit'} Let's get this party started
 
     .clearfix
     = paginate(@questions)
@@ -63,27 +63,27 @@
             - @group.users.limit(20).each do |user|
               %li
                 = link_to(user_path(user)) do
-                  = image_tag(user.avatar_url(32), :width => 32, :height => 32)
+                  = image_tag(user.avatar_url(32), width: 32, height: 32)
           = link_to("Show all users (#{@group.users.size})", '#') if @group.users.size > 20
 
     - if logged_in? && @group.user_role(current_user)
       #group-admin
         %h3 Admin Options
         #membership-add.modal.hide.fade{:style => 'display: none;'}
-          = simple_form_for(:membership, :url => group_memberships_path(@group), :html => { :class => 'form-horizontal' }) do |f|
+          = simple_form_for(:membership, url: group_memberships_path(@group)) do |f|
             .modal-header
               %a.close{:'data-dismiss' => 'modal'} x
               %h3 Invite Users
             .modal-body
               %p Invite your friends to this group! Or enemies. Or whomever you want, really. You're an admin, so you can do that.
               .control-group
-                = f.input(:invitation_email, :label => 'Email')
-                = f.input(:role, :as => :select, :collection => Membership::ROLE_OPTIONS, :prompt => nil)
+                = f.input(:invitation_email, label: 'Email')
+                = f.input(:role, as: :select, collection: Membership::ROLE_OPTIONS, prompt: nil)
             .modal-footer
-              %a.btn{:href => '#', :'data-dismiss' => 'modal'} Close
+              %a.btn{href: '#', :'data-dismiss' => 'modal'} Close
               %button.btn.btn-primary{:type => 'submit'} Send invite
         %ul.unstyled.admin
           %li
             = link_to('Invite New User', '#membership-add', :'data-toggle' => 'modal')
 
-    = render('groups/sidebar', :base => @group.questions, :new_path => new_group_question_path(@group))
+    = render('groups/sidebar', base: @group.questions, new_path: new_group_question_path(@group))

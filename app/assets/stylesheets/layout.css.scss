@@ -26,6 +26,12 @@ button.facebook {
 }
 
 ul {
+  &.unstyled {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+
   &.inline {
     margin-left: 0;
     padding-left: 0;
@@ -108,7 +114,6 @@ aside {
 
   .box {
     .status {
-      padding: 10px 5px 5px 80px;
       background: #EEE;
       display: block;
       border-top: 1px solid #DDD;
@@ -271,16 +276,6 @@ li.comment {
 
 .control-group.hidden {
   display: none;
-}
-
-.longform {
-  input, textarea, select {
-    width: 300px;
-  }
-
-  .form-actions {
-    background: transparent;
-  }
 }
 
 ul.participants {
