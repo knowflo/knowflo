@@ -5,13 +5,14 @@
 .row
   .col-md-8
     - if logged_in?
-      %h3 Your Private Groups
-      %dl.my-groups.private.unstyled
-        - @groups.private_groups.each do |group|
-          %dt
-            %span= link_to(group.name, group_root_url(group))
-            %span= "[#{group.user_role(current_user)}]"
-          %dd= group.description
+      - if @groups.private_groups.any?
+        %h3 Your Private Groups
+        %dl.my-groups.private.unstyled
+          - @groups.private_groups.each do |group|
+            %dt
+              %span= link_to(group.name, group_root_url(group))
+              %span= "[#{group.user_role(current_user)}]"
+            %dd= group.description
 
       %h3 Public Groups
 
