@@ -63,8 +63,8 @@
                       %span.glyphicon.glyphicon-ok
 
                   %span answered
-                  %span= "#{time_ago_in_words(answer.created_at)} ago"
-                  %span= "by #{link_to(answer.user.name, user_path(answer.user))}"
+                  %span= "#{time_ago_in_words(answer.created_at)} ago by"
+                  %span= link_to(answer.user.name, user_path(answer.user))
                   - if answer.updated_at > answer.created_at + 1.minute
                     %em (updated)
 
