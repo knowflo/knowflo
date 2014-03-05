@@ -9,6 +9,9 @@ gem 'coffee-rails'
 gem 'uglifier'
 gem 'pg'
 
+gem 'foreman'
+gem 'thin'
+
 # assets
 # gem 'bootstrap-sass'
 gem 'jquery-rails'
@@ -38,7 +41,6 @@ group :production do
   gem 'rails_12factor'
 end
 
-gem 'foreman'
 gem 'json'
 gem 'jbuilder'
 gem 'haml-rails'
