@@ -1,28 +1,19 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.3'
+ruby '2.1.0'
 
-# Bundle edge Rails instead:
-# gem 'rails', :git => 'git://github.com/rails/rails.git'
+# rails
+gem 'rails', '3.2.17'
+gem 'sass-rails'
+gem 'coffee-rails'
+gem 'uglifier'
+gem 'pg'
 
-# Gems used only for assets and not required
-# in production environments by default.
-group :assets do
-  gem 'sass-rails',   '~> 3.2.5'
-  gem 'coffee-rails', '~> 3.2.2'
-
-  # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-  # gem 'therubyracer'
-
-  gem 'uglifier', '>= 1.0.3'
-end
-
-group :production do
-  gem 'pg'
-end
+# assets
+# gem 'bootstrap-sass'
+gem 'jquery-rails'
 
 group :development, :test do
-  gem 'mysql2'
   gem 'rspec-rails', '~> 2.8'
   gem 'rspec-instafail'
   gem 'capybara'
@@ -43,10 +34,15 @@ group :test do
   gem 'timecop'
 end
 
-gem 'squeel'
+group :production do
+  gem 'rails_12factor'
+end
+
+gem 'foreman'
 gem 'json'
+gem 'jbuilder'
 gem 'haml-rails'
-gem 'jquery-rails'
+gem 'squeel'
 gem 'bcrypt-ruby', '~> 3.0.0'
 gem 'exception_notification'
 gem 'omniauth', '~> 1.0.2'
@@ -55,7 +51,6 @@ gem 'omniauth-facebook', '~> 1.2.0'
 gem 'simple_form'
 gem 'configuration'
 gem 'stringex'
-gem 'jbuilder'
 gem 'kaminari'
 gem 'validates_email_format_of'
 

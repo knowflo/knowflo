@@ -38,10 +38,11 @@ ActiveRecord::Schema.define(:version => 20120731020843) do
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
     t.text     "description"
-    t.string   "cname"
     t.string   "logo_url"
     t.text     "welcome_message"
   end
+
+  add_index "groups", ["url"], :name => "index_groups_on_url"
 
   create_table "memberships", :force => true do |t|
     t.integer  "user_id"
@@ -53,6 +54,8 @@ ActiveRecord::Schema.define(:version => 20120731020843) do
     t.string   "token"
     t.integer  "invited_by_user_id"
   end
+
+  add_index "memberships", ["user_id", "group_id"], :name => "index_group_users_on_user_id_and_group_id"
 
   create_table "questions", :force => true do |t|
     t.integer  "user_id"
