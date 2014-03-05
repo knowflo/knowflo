@@ -47,9 +47,9 @@
                 .pull-left
                   .vote{:'data-url' => vote_group_answer_path(@group, answer)}
                     %a.up{:href => '#', :'data-value' => 1, :class => upvote_class(answer)}
-                      %i.icon-chevron-up.icon-white
+                      %span.glyphicon.glyphicon-chevron-up
                     %a.down{:href => '#', :'data-value' => -1, :class => downvote_class(answer)}
-                      %i.icon-chevron-down.icon-white
+                      %span.glyphicon.glyphicon-chevron-down
                 %a.pull-left.thumbnail{:href => user_path(answer.user)}= image_tag(answer.user.avatar_url(32), :width => 32, :height => 32)
                 .status
                   .points.pull-right= answer.points
@@ -57,14 +57,14 @@
                     = form_tag(mark_group_answer_path(@group, answer)) do
                       = link_to('#', :title => 'Mark this solution as correct', :class => 'accept-answer') do
                         .mark.pull-right.interactive{:class => answer.accepted? ? 'active' : ''}
-                          %i.icon-ok.icon-white
+                          %span.glyphicon.glyphicon-ok
                   - elsif answer.accepted?
                     .mark.pull-right
-                      %i.icon-ok.icon-white
+                      %span.glyphicon.glyphicon-ok
 
-                  %span= link_to(answer.user.name, user_path(answer.user))
                   %span answered
                   %span= "#{time_ago_in_words(answer.created_at)} ago"
+                  %span= "by #{link_to(answer.user.name, user_path(answer.user))}"
                   - if answer.updated_at > answer.created_at + 1.minute
                     %em (updated)
 

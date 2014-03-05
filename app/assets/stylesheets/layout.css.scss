@@ -118,14 +118,12 @@ aside {
       display: block;
       border-top: 1px solid #DDD;
       border-bottom: 1px solid #DDD;
-      line-height: 25px;
+      line-height: 42px;
+      min-height: 42px;
+      padding-left: 81px;
 
       &.full {
         padding-left: 50px;
-      }
-
-      h3, h4 {
-        line-height: 25px;
       }
 
       form {
@@ -158,14 +156,18 @@ aside {
       .up, .down {
         display: block;
         background: #08C;
-        padding: 0 5px;
         margin-right: 5px;
         overflow: hidden;
         border-radius: 5px;
         border: 1px solid #DDD;
+        height: 20px;
+        width: 26px;
+        vertical-align: middle;
+        text-align: center;
 
         &.disabled {
           background: #EEE !important;
+          color: #AAA;
         }
 
         &.active {
@@ -211,10 +213,12 @@ aside {
     color: #FFF;
     padding: 0 8px;
     margin-right: 5px;
-    margin-top: -3px;
+    margin-top: 7px;
     border-radius: 5px;
     border: 1px solid #DDD;
-    height: 25px;
+    height: 26px;
+    min-width: 26px;
+    line-height: 26px;
   }
 
   .mark {
