@@ -36,7 +36,7 @@
     #answers
       %h3
         - if @question.answers.any?
-          = pluralize(@question.answers.size, 'Answers')
+          = pluralize(@question.answers.size, 'Answer')
         - else
           Awaiting Answers
       %ul.unstyled.answers
