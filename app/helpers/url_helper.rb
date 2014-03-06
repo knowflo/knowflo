@@ -5,12 +5,13 @@ module UrlHelper
     subdomain = (subdomain || '')
     subdomain = subdomain.url if subdomain.respond_to?(:url)
     subdomain += "." unless subdomain.blank?
-    [subdomain, request.domain, request.port_string].join
+    [subdomain, request.domain].join
   end
 
   def url_for(options = nil)
     if options.kind_of?(Hash) && options.has_key?(:subdomain)
       options[:host] = with_subdomain(options.delete(:subdomain))
+      options[:port] = request.port
     end
 
     super
@@ -20,7 +21,7 @@ module UrlHelper
     if request.domain == 'localhost'
       group_url(group)
     else
-      root_url(:subdomain => group.url)
+      root_url(subdomain: group.url)
     end
   end
 end
