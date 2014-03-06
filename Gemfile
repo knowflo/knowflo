@@ -55,6 +55,7 @@ gem 'configuration'
 gem 'stringex'
 gem 'kaminari'
 gem 'validates_email_format_of'
+gem 'algoliasearch-rails'
 
 gem 'simple_admin', :git => 'git://github.com/zapnap/simple_admin.git', :branch => 'rails-3-2'
 gem 'formtastic' # icky, for simple_admin (todo: replace with simple_form)

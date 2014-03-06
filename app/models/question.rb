@@ -1,4 +1,6 @@
 class Question < ActiveRecord::Base
+  include AlgoliaSearch
+
   belongs_to :user
   belongs_to :group
 
@@ -18,6 +20,10 @@ class Question < ActiveRecord::Base
   scope :recent, order('created_at DESC')
   scope :answered, where('answers_count != ?', 0)
   scope :unanswered, where('answers_count = ?', 0)
+
+  algoliasearch do
+    attribute :subject, :url
+  end
 
   def to_param
     "#{id}-#{url}"
