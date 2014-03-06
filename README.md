@@ -4,11 +4,8 @@ Knowflo is a super basic Q&A platform for public and private groups. It
 was developed (in a hurry!) to facilitate knowledge sharing for a couple
 small communities.
 
-It isn't pretty. It isn't really finished. And yes, it uses the Twitter
-Bootstrap default theme. Because I'm a lazy, lazy person who has far too
-many other projects.
-
-Did I mention that we're happy to accept pull requests? :)
+It isn't pretty. It isn't really finished. Did I mention that we're happy
+to accept pull requests? :)
 
 ## Public Server
 
