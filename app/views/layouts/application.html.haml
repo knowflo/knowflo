@@ -67,9 +67,12 @@
                 %li= link_to('Privacy Policy', privacy_url(:subdomain => false))
             %p
               knowflo is a simple way to ask and answer questions.
-              On the Internet. It isn't rocket science.
-              &copy;
-              = "#{Time.now.year} zerosum labs"
+              On the Internet.
+            %p
+              It isn't rocket science.
+              %strong
+                &copy;
+                = "#{Time.now.year} zerosum labs"
             %p
           .col-md-6
             %p.pull-right= link_to('Back to top', '#')
