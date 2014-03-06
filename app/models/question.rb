@@ -22,7 +22,13 @@ class Question < ActiveRecord::Base
   scope :unanswered, where('answers_count = ?', 0)
 
   algoliasearch do
-    attribute :subject, :url
+    attribute :subject, :url, :group_id
+    attribute :group_name do
+      group.try(:name)
+    end
+    attribute :group_private do
+      group.try(:private?)
+    end
   end
 
   def to_param
@@ -64,5 +70,9 @@ class Question < ActiveRecord::Base
     if user && group && group.private?
       errors.add(:user_id, 'is not authorized') unless group.users.include?(user)
     end
+  end
+
+  def group_name
+    group.name
   end
 end
