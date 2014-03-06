@@ -151,41 +151,27 @@ aside {
       background: #FFF;
 
       .up, .down {
+        padding-top: 3px;
+        color: #08C;
         display: block;
-        background: #08C;
-        color: #fff;
         margin-right: 5px;
-        overflow: hidden;
-        border-radius: 5px;
-        border: 1px solid #DDD;
-        height: 20px;
-        width: 26px;
-        vertical-align: middle;
-        text-align: center;
+        height: 21px;
 
         &.disabled {
-          background: #EEE !important;
-          color: #AAA;
+          color: #EEE;
         }
 
         &.active {
-          background: #005580;
+          color: #005580;
         }
 
         &:hover {
-          text-decoration: none;
-          background: #005580;
-        }
-
-        span {
-          line-height: normal;
-          vertical-align: middle;
-          text-align: center;
+          color: #005580;
         }
       }
 
-      .down {
-        margin-top: 2px;
+      .up {
+        margin-left: 1px;
       }
     }
   }
@@ -230,10 +216,11 @@ aside {
     color: #FFF;
     padding: 0 8px;
     margin-right: 5px;
-    margin-top: -3px;
+    margin-top: 7px;
     border-radius: 5px;
     border: 1px solid #DDD;
-    height: 25px;
+    height: 26px;
+    line-height: 26px;
 
     &.interactive {
       background: #999;
