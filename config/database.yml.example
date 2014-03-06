@@ -13,7 +13,6 @@ development: &default
   min_message: warning
   pool: 5
   timeout: 5000
-  socket: /var/run/mysqld/mysqld.sock
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
