@@ -21,7 +21,7 @@
         .clearfix
         .bodytext
           - if owner_logged_in?(@question)
-            .hidden.editable
+            .hideme.editable
               = simple_form_for([@group, @question]) do |f|
                 = f.input(:body, :as => :text, :label => false, :input_html => { :rows => 5, :class => 'wysiwyg' })
                 = f.submit('Update', :class => 'btn btn-inverse')
@@ -73,7 +73,7 @@
                   This answer was marked as correct.
               .bodytext
                 - if owner_logged_in?(answer)
-                  .hidden.editable
+                  .hideme.editable
                     = simple_form_for([@group, answer]) do |f|
                       = f.input(:body, :as => :text, :label => false, :input_html => { :rows => 3, :class => 'wysiwyg' })
                       = f.submit('Update', :class => 'btn btn-inverse')
@@ -93,7 +93,7 @@
                       .box
                         .bodytext
                           - if owner_logged_in?(comment)
-                            .hidden.editable
+                            .hideme.editable
                               = simple_form_for([@group, comment]) do |f|
                                 = f.input(:body, :as => :text, :label => false, :input_html => { :rows => 2, :class => 'wysiwyg' })
                                 = f.submit('Update', :class => 'btn btn-inverse')
