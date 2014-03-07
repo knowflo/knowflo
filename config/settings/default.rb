@@ -4,6 +4,7 @@ default = Configuration.for('default') do
 
   exception_sender 'errors@knowflo.info'
   admin_emails ['nap@zerosum.org']
+  reply_email 'reply@knowflo.info'
 
   facebook_app_id 'facebook app id'
   facebook_app_secret 'facebook app secret'
