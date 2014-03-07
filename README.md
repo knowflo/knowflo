@@ -13,6 +13,13 @@ There's a public hosted version of Knowflo running on
 [Heroku](http://knowflo.info) that you can try out if you like. Note
 that the public test group may be cleaned out from time to time.
 
+## Configuration
+
+You'll want to configure the Facebook and Algolia integrations (or disable
+those components). If you're deploying on Heroku you can set these as
+environment variables. See <code>config/settings/default.rb</code> for
+app-specific configuration settings.
+
 ## Note on Patches / Pull Requests
 
 * Fork the project.
