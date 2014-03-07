@@ -21,13 +21,15 @@ class Question < ActiveRecord::Base
   scope :answered, where('answers_count != ?', 0)
   scope :unanswered, where('answers_count = ?', 0)
 
-  algoliasearch do
-    attribute :subject, :url, :group_id
-    attribute :group_name do
-      group.try(:name)
-    end
-    attribute :group_private do
-      group.try(:private?)
+  unless Rails.env.test?
+    algoliasearch do
+      attribute :subject, :url, :group_id
+      attribute :group_name do
+        group.try(:name)
+      end
+      attribute :group_private do
+        group.try(:private?)
+      end
     end
   end
 
