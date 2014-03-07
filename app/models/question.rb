@@ -22,7 +22,7 @@ class Question < ActiveRecord::Base
   scope :unanswered, where('answers_count = ?', 0)
 
   unless Rails.env.test?
-    algoliasearch do
+    algoliasearch per_environment: true do
       attribute :subject, :url, :group_id
       attribute :group_name do
         group.try(:name)
