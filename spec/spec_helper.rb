@@ -34,7 +34,4 @@ RSpec.configure do |config|
   # authentication spec helpers
   config.include AuthenticationSpecHelper, :type => :controller
   config.include UrlHelper, :type => :controller
-
-  # add VCR support (macro)
-  config.extend VCR::RSpec::Macros
 end
