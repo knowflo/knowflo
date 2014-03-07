@@ -1,9 +1,9 @@
 require "spec_helper"
 
 describe Notifier do
-  describe 'beta_request' do
+  describe 'group_invitation' do
     before(:each) do
-      @membership = Factory(:invitation, :invitation_email => 'invited@zerosum.org')
+      @membership = FactoryGirl.create(:invitation, :invitation_email => 'invited@zerosum.org')
       @membership.group.update_attribute(:welcome_message, 'hello nurse')
       @mail = Notifier.group_invitation(@membership.id)
     end

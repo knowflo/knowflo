@@ -3,7 +3,7 @@ require 'spec_helper'
 describe QuestionsController do
   describe 'index' do
     it 'should redirect to the group page' do
-      group = Factory(:group)
+      group = FactoryGirl.create(:group)
       login
 
       get :index, :group_id => group
@@ -13,7 +13,7 @@ describe QuestionsController do
 
   describe 'new' do
     before(:each) do
-      @group = Factory(:group)
+      @group = FactoryGirl.create(:group)
       @params = { :group_id => @group, :question => FactoryGirl.attributes_for(:question, :group => @group) }
       login
     end
@@ -31,9 +31,9 @@ describe QuestionsController do
 
   describe 'create' do
     before(:each) do
-      @group = Factory(:group)
+      @group = FactoryGirl.create(:group)
       @params = { :group_id => @group, :question => FactoryGirl.attributes_for(:question, :group => @group) }
-      login(@user = Factory(:user))
+      login(@user = FactoryGirl.create(:user))
     end
 
     it 'should require login' do
@@ -76,7 +76,7 @@ describe QuestionsController do
 
   describe 'update' do
     before(:each) do
-      @question = Factory(:question)
+      @question = FactoryGirl.create(:question)
       @params = { :group_id => @question.group, :id => @question, :question => { :body => 'updated question' } }
     end
 
@@ -111,7 +111,7 @@ describe QuestionsController do
 
   describe 'show' do
     before(:each) do
-      @question = Factory(:question)
+      @question = FactoryGirl.create(:question)
       @params = { :group_id => @question.group, :id => @question}
     end
 
@@ -142,7 +142,7 @@ describe QuestionsController do
 
       it 'should allow a group member to view questions' do
         user = login
-        Factory(:membership, :group => @group, :user => user)
+        FactoryGirl.create(:membership, :group => @group, :user => user)
 
         get :show, @params
         response.should render_template('show')
@@ -153,7 +153,7 @@ describe QuestionsController do
 
   describe 'destroy' do
     before(:each) do
-      @question = Factory(:question)
+      @question = FactoryGirl.create(:question)
       @params = { :group_id => @question.group, :id => @question }
     end
 

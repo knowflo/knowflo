@@ -30,7 +30,7 @@ describe Group do
     end
 
     it 'should be visible if public' do
-      FactoryGirl.create(:group, :privacy => 'public').visible_to(Factory(:user)).should be_true
+      FactoryGirl.create(:group, :privacy => 'public').visible_to(FactoryGirl.create(:user)).should be_true
     end
 
     it 'should be visible only if a user belongs to a private group' do
@@ -68,7 +68,7 @@ describe Group do
     end
 
     it 'should not be nil' do
-      FactoryGirl.create(:group).user_role(Factory(:user)).should be_nil
+      FactoryGirl.create(:group).user_role(FactoryGirl.create(:user)).should be_nil
     end
   end
 end

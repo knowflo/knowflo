@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Answer do
   describe 'user' do
     it { should_not have_valid(:user_id).when(nil, '') }
-    it { should have_valid(:user_id).when(Factory(:user).id) }
+    it { should have_valid(:user_id).when(FactoryGirl.create(:user).id) }
 
     context 'with a private group' do
       before(:each) do
@@ -14,11 +14,11 @@ describe Answer do
 
       it 'should be allowed to post' do
         user = FactoryGirl.create(:membership, :group => @group).user
-        Factory(:answer, :user => user, :question => @question).should be_valid
+        FactoryGirl.create(:answer, :user => user, :question => @question).should be_valid
       end
 
       it 'should not be allowed to post' do
-        user = Factory(:user)
+        user = FactoryGirl.create(:user)
         answer = FactoryGirl.build(:answer, :user => user, :question => @question)
         answer.should_not be_valid
         answer.errors[:user_id].should include('is not authorized')

@@ -1,5 +1,5 @@
 module AuthenticationSpecHelper
-  def login(user = Factory(:user))
+  def login(user = FactoryGirl.create(:user))
     session[:user_id] = user.id
     user
   end
