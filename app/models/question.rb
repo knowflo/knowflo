@@ -30,6 +30,10 @@ class Question < ActiveRecord::Base
       attribute :group_private do
         group.try(:private?)
       end
+
+      tags do
+        ["group_#{group_id}", "status_#{group.try(:privacy)}"]
+      end
     end
   end
 
