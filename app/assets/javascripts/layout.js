@@ -43,7 +43,7 @@ $(document).ready(function() {
   });
 
   var algoliaClient = new AlgoliaSearch($('meta[name="algolia-app-id"]').attr('content'), $('meta[name="algolia-api-key"]').attr('content'));
-  var algoliaTemplate = Hogan.compile('{{{_highlightResult.subject.value}}}');
+  var algoliaTemplate = '{{{_highlightResult.subject.value}}}';
   var algoliaGroup = $('meta[name="group-id"]').attr('content');
   var algoliaOptions = {};
 
@@ -51,7 +51,10 @@ $(document).ready(function() {
     algoliaOptions['tagFilters'] = ['group_' + algoliaGroup];
   } else {
     algoliaOptions['tagFilters'] = ['status_public'];
+    algoliaTemplate += " ({{{_highlightResult.group_name.value}}})"
   }
+
+  algoliaTemplate = Hogan.compile(algoliaTemplate);
 
   $('input#search').typeahead({ minLength: 3 }, {
     source: algoliaClient.initIndex($('meta[name="algolia-index-name"]').attr('content')).ttAdapter(algoliaOptions),
@@ -60,6 +63,19 @@ $(document).ready(function() {
       suggestion: function(hit) {
         return algoliaTemplate.render(hit);
       }
+    }
+  });
+
+  $('input#search').on('typeahead:selected', function(event, obj) {
+    if (algoliaGroup == obj.group_id) {
+      window.location.pathname = "/questions/" + obj.url;
+    } else {
+      var parts = window.location.host.split('.').slice(-2);
+      var pathPattern = new RegExp(window.location.pathname + '$');
+      var url = window.location.href.
+        replace(window.location.host, obj.group_url + '.' + parts.join('.')).
+        replace(pathPattern, '/questions/' + obj.url);
+      window.location = url;
     }
   });
 });
