@@ -43,11 +43,18 @@ $(document).ready(function() {
   });
 
   var algoliaClient = new AlgoliaSearch($('meta[name="algolia-app-id"]').attr('content'), $('meta[name="algolia-api-key"]').attr('content'));
-  console.log(algoliaClient);
   var algoliaTemplate = Hogan.compile('{{{_highlightResult.subject.value}}}');
+  var algoliaGroup = $('meta[name="group-id"]').attr('content');
+  var algoliaOptions = {};
+
+  if (algoliaGroup != undefined) {
+    algoliaOptions['tagFilters'] = ['group_' + algoliaGroup];
+  } else {
+    algoliaOptions['tagFilters'] = ['status_public'];
+  }
 
   $('input#search').typeahead({ minLength: 3 }, {
-    source: algoliaClient.initIndex($('meta[name="algolia-index-name"]').attr('content')).ttAdapter(),
+    source: algoliaClient.initIndex($('meta[name="algolia-index-name"]').attr('content')).ttAdapter(algoliaOptions),
      displayKey: 'subject',
      templates: {
       suggestion: function(hit) {

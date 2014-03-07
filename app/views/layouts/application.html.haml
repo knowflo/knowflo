@@ -9,6 +9,8 @@
     %meta{name: 'algolia-app-id', content: Settings.algolia_app_id}
     %meta{name: 'algolia-api-key', content: Settings.algolia_search_key}
     %meta{name: 'algolia-index-name', content: Settings.algolia_index_name}
+    - if @group
+      %meta{name: 'group-id', content: @group.id}
 
   %body
     %header.navbar.navbar-inverse.navbar-fixed-top

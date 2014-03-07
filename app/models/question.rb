@@ -24,9 +24,11 @@ class Question < ActiveRecord::Base
   unless Rails.env.test?
     algoliasearch per_environment: true do
       attribute :subject, :url, :group_id
+
       attribute :group_name do
         group.try(:name)
       end
+
       attribute :group_private do
         group.try(:private?)
       end
