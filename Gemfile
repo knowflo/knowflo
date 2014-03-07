@@ -17,6 +17,7 @@ gem 'bootstrap-sass'
 gem 'jquery-rails'
 
 group :development, :test do
+  gem 'dotenv-rails'
   gem 'rspec-rails', '~> 2.8'
   gem 'rspec-instafail'
   gem 'capybara'

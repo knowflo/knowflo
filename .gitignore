@@ -18,5 +18,5 @@
 /config/database.yml
 /config/settings/development.rb
 
-.rvmrc
+.env
 .sass-cache

@@ -6,6 +6,9 @@
     = csrf_meta_tags
     - # %link{:rel => 'shortcut icon', :href => 'assets/favicon.ico'}
     = yield :head
+    %meta{name: 'algolia-app-id', content: Settings.algolia_app_id}
+    %meta{name: 'algolia-api-key', content: Settings.algolia_search_key}
+    %meta{name: 'algolia-index-name', content: Settings.algolia_index_name}
 
   %body
     %header.navbar.navbar-inverse.navbar-fixed-top
@@ -20,7 +23,7 @@
           .col-md-3.navbar-right
             %form.navbar-search.navbar-form
               .input-group
-                %input.form-control.search-query{type: 'text', placeholder: 'Search'}
+                %input.form-control.search-query#search{type: 'text', placeholder: 'Search'}
                 %span.input-group-btn
                   %button.btn.btn-default{type: 'button'}
                     %span.glyphicon.glyphicon-search

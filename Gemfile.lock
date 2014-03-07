@@ -76,6 +76,8 @@ GEM
     daemons (1.1.9)
     diff-lcs (1.2.5)
     dotenv (0.10.0)
+    dotenv-rails (0.10.0)
+      dotenv (= 0.10.0)
     erubis (2.7.0)
     eventmachine (1.0.3)
     exception_notification (4.0.1)
@@ -298,6 +300,7 @@ DEPENDENCIES
   capybara
   coffee-rails
   configuration
+  dotenv-rails
   exception_notification
   factory_girl_rails
   foreman

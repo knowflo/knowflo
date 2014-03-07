@@ -9,7 +9,9 @@ default = Configuration.for('default') do
   facebook_app_secret 'facebook app secret'
 
   algolia_app_id 'algolia app id'
-  algolia_api_key 'algolia api key'
+  algolia_api_key 'algolia read-write api key'
+  algolia_search_key 'algolia read-only api key'
+  algolia_index_name 'Question_production'
 end
 
 Configuration.for('development', default) do

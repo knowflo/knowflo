@@ -41,6 +41,20 @@ $(document).ready(function() {
       return false;
     }
   });
+
+  var algoliaClient = new AlgoliaSearch($('meta[name="algolia-app-id"]').attr('content'), $('meta[name="algolia-api-key"]').attr('content'));
+  console.log(algoliaClient);
+  var algoliaTemplate = Hogan.compile('{{{_highlightResult.subject.value}}}');
+
+  $('input#search').typeahead({ minLength: 3 }, {
+    source: algoliaClient.initIndex($('meta[name="algolia-index-name"]').attr('content')).ttAdapter(),
+     displayKey: 'subject',
+     templates: {
+      suggestion: function(hit) {
+        return algoliaTemplate.render(hit);
+      }
+    }
+  });
 });
 
 function wysiwyg(e) {

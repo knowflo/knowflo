@@ -17,5 +17,8 @@
 //= require jquery.scrollTo.js
 //= require bootstrap
 //= require underscore
+//= require hogan
+//= require algolia/algoliasearch.min
+//= require algolia/typeahead.jquery
 //= require_tree ./jwysiwyg
 //= require layout
