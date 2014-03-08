@@ -6,7 +6,7 @@ class Notifier < ActionMailer::Base
     @group = @membership.group
 
     mail(:to => @membership.invitation_email || @membership.user.email,
-         :from => @membership.invited_by_user.try(:email) || Settings.reply_email
+         :from => @membership.invited_by_user.try(:email) || Settings.reply_email,
          :subject => "You've been invited to the #{@membership.group.name} group")
   end
 
