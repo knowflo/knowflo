@@ -18,7 +18,8 @@ that the public test group may be cleaned out from time to time.
 You'll want to configure the Facebook and Algolia integrations (or disable
 those components). If you're deploying on Heroku you can set these as
 environment variables. See <code>config/settings/default.rb</code> for
-app-specific configuration settings.
+app-specific configuration settings. You'll also want to configure the
+mailer; out of the box it looks for <code>SENDGRID_USERNAME</code> and <code>SENDGRID_PASSWORD</code>.
 
 ## Note on Patches / Pull Requests
 
