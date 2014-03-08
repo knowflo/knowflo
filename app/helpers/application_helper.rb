@@ -36,7 +36,7 @@ module ApplicationHelper
   end
 
   def post_format(text)
-    sanitize text.html_safe
+    raw Rinku.auto_link(sanitize(text.html_safe))
     # sanitize Kramdown::Document.new(text.strip).to_html
   end
 
