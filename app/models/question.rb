@@ -8,6 +8,9 @@ class Question < ActiveRecord::Base
            :dependent => :destroy,
            :order     => 'solution DESC, points_cache DESC'
 
+  has_many :followings, dependent: :destroy
+  has_many :following_users, through: :followings, source: :user
+
   validates :group_id, :presence => true
   validates :user_id,  :presence => true
   validates :subject,  :presence => true

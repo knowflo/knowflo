@@ -19,6 +19,7 @@ class QuestionsController < ApplicationController
     @question.user = current_user
     if @question.save
       @membership = @group.memberships.find_or_create_by_user_id(current_user.id)
+      @following = @question.followings.find_or_create_by_user_id(current_user.id)
       flash[:success] = "Your question was added. Hopefully someone answers it soon."
       redirect_to(question_url(@question, :subdomain => @group))
     else

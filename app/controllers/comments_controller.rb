@@ -12,6 +12,7 @@ class CommentsController < ApplicationController
 
     if @comment.save
       @membership = @group.memberships.find_or_create_by_user_id(current_user.id)
+      @following = @question.followings.find_or_create_by_user_id(current_user.id)
       flash[:success] = "Thanks for commenting on that answer, chief."
       redirect_to(question_url(@question, :subdomain => @group))
     else

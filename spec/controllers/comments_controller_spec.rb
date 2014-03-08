@@ -35,6 +35,11 @@ describe CommentsController do
         @answer.group.users.should include(@user)
       end
 
+      it 'adds the user to the list of users following the question' do
+        post :create, @params
+        @question.following_users.should include(@user)
+      end
+
       it 'should redirect' do
         post :create, @params
         flash[:success].should_not be_blank

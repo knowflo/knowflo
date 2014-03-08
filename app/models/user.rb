@@ -10,6 +10,9 @@ class User < ActiveRecord::Base
   has_many :comments
   has_many :votes
 
+  has_many :followings, dependent: :destroy
+  has_many :following_questions, through: :followings, source: :question
+
   has_many :memberships, :dependent => :destroy
   has_many :groups, :through => :memberships
 
