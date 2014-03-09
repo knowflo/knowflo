@@ -36,7 +36,7 @@ describe Notifier do
     let(:ignored_user) { FactoryGirl.create(:user) }
     let(:group) { FactoryGirl.create(:group) }
     let(:question) { FactoryGirl.create(:question, group: group) }
-    let(:mail) { Notifier.new_question(question.id) }
+    let(:mail) { Notifier.new_question(question.id, question.user_id) }
 
     before(:each) do
       FactoryGirl.create(:membership, group: group, user: following_user, notifications_enabled: true)
@@ -70,7 +70,7 @@ describe Notifier do
     let(:group) { FactoryGirl.create(:group) }
     let(:question) { FactoryGirl.create(:question, group: group) }
     let(:answer) { FactoryGirl.create(:answer, question: question) }
-    let(:mail) { Notifier.new_answer(answer.id) }
+    let(:mail) { Notifier.new_answer(answer.id, answer.user_id) }
 
     before(:each) do
       FactoryGirl.create(:membership, group: group, user: following_user)

@@ -21,8 +21,9 @@ class Notifier < ActionMailer::Base
     @user = @question.user
     sender = sender_id.present? ? User.find(sender_id).email : nil
 
-    sendgrid_recipients @question.group.following_users.map(&:email).reject { |email| email == sender }
-    mail(to: @user.email, subject: "[#{Settings.app_name}] New question for you: '#{@question.subject}'")
+    recipients = @question.group.following_users.map(&:email).reject { |email| email == sender }
+    sendgrid_recipients recipients
+    mail(to: recipients.first, subject: "[#{Settings.app_name}] New question for you: '#{@question.subject}'")
   end
 
   def new_answer(answer_id, sender_id=nil)
