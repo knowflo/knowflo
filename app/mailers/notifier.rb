@@ -16,22 +16,22 @@ class Notifier < ActionMailer::Base
          subject: "[#{Settings.app_name}] You've been invited to the #{@membership.group.name} group")
   end
 
-  def new_question(question_id)
+  def new_question(question_id, sender_id=nil)
     @question = Question.find(question_id)
     @user = @question.user
+    sender = sender_id.present? ? User.find(sender_id).email : nil
 
-    sendgrid_recipients @question.group.following_users.map(&:email)
-
+    sendgrid_recipients @question.group.following_users.map(&:email).reject { |email| email == sender }
     mail(to: @user.email, subject: "[#{Settings.app_name}] New question for you: '#{@question.subject}'")
   end
 
-  def new_answer(answer_id)
+  def new_answer(answer_id, sender_id=nil)
     @answer = Answer.find(answer_id)
     @question = @answer.question
     @user = @question.user
+    sender = sender_id.present? ? User.find(sender_id).email : nil
 
-    sendgrid_recipients @question.following_users.map(&:email)
-
+    sendgrid_recipients @question.following_users.map(&:email).reject { |email| email == sender }
     mail(to: @question.user.email, subject: "[#{Settings.app_name}] New answer for '#{@question.subject}'")
   end
 

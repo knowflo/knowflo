@@ -39,6 +39,12 @@ describe AnswersController do
         @question.following_users.should include(@user)
       end
 
+      it 'sends email alerts' do
+        expect {
+          post :create, @params
+        }.to change(ActionMailer::Base.deliveries, :count)
+      end
+
       it 'should redirect' do
         post :create, @params
         flash[:success].should_not be_blank

@@ -51,6 +51,10 @@ describe Notifier do
       email_recipients(mail).should_not include(ignored_user.email)
     end
 
+    it 'does not send email to the user who created the question' do
+      email_recipients(mail).should_not include(question.user.email)
+    end
+
     it 'contains the new question subject and body' do
       mail.subject.should match(/#{question.subject}/)
 
@@ -80,6 +84,10 @@ describe Notifier do
 
     it 'does not send email to group members who have notifications disabled' do
       email_recipients(mail).should_not include(ignored_user.email)
+    end
+
+    it 'does not send email to the user who created the question' do
+      email_recipients(mail).should_not include(answer.user.email)
     end
 
     it 'contains the question subject and the new answer text' do
