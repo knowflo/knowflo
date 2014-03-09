@@ -4,5 +4,5 @@ There's a new question in the <%= Settings.app_name %> <%= @question.group.name 
 
 "<%= @question.body %>"
 
-You can get involved in the conversation by visiting <%= group_question_url(@question.group, @question) %>.
+You can get involved in the conversation by visiting <%= question_url(@question, subdomain: @question.group) %>.
 If you'd prefer to stop receiving emails like this, change your notification settings at <%= settings_url %>.
