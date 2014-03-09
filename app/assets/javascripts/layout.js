@@ -10,28 +10,6 @@ $(document).ready(function() {
     e.stopPropagation(); return false;
   });
 
-  $(window).scroll(function() {
-    var sidebar = $('#sidebar .floating');
-    var sidebarAllowance = 60 + sidebar.outerHeight();
-    var position = $(window).scrollTop();
-
-    if (position >= $('footer').position().top - sidebarAllowance) {
-      position = $('footer').position().top - sidebarAllowance;
-    }
-
-    sidebar.animate(
-      { top: position + 'px' },
-      { queue: false, duration: 500, easing: 'easeInOutSine' }
-    );
-  });
-
-  /*
-  $('#sidebar .logo').hover(
-    function() { $(this).rotate({ animateTo: 10 }); },
-    function() { $(this).rotate({ animateTo: 0 }); }
-  );
-  */
-
   wysiwyg($('.wysiwyg:visible'));
 
   $('.btn-danger').parents('form').submit(function() {

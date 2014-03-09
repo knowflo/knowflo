@@ -13,7 +13,6 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery-migrate
-//= require easing
 //= require jquery.scrollTo.js
 //= require bootstrap
 //= require underscore

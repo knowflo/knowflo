@@ -53,20 +53,16 @@ aside {
 }
 
 #sidebar {
-  width: 100%;
-  position: absolute;
-  top: 0;
+  padding-top: 20px;
+
+  .affix {
+    top: 80px;
+  }
 
   .logo {
     text-align: center;
     margin-bottom: 10px;
     margin-top: 20px;
-    display: block;
-  }
-
-  .floating {
-    position: absolute;
-    top: 0;
   }
 }
 

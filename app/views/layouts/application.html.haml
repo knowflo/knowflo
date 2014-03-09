@@ -38,7 +38,7 @@
       .row
         %aside.col-md-2
           #sidebar
-            .floating
+            .floating{'data-spy' => 'affix', 'data-offset-top' => '0'}
               - if @group && @group.logo_url.present?
                 = link_to(root_path, :class => 'logo') do
                   = image_tag(@group.logo_url, :width => 120, :height => 120)
