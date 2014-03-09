@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140308064726) do
+ActiveRecord::Schema.define(:version => 20140309032643) do
 
   create_table "answers", :force => true do |t|
     t.integer  "user_id"
@@ -55,11 +55,12 @@ ActiveRecord::Schema.define(:version => 20140308064726) do
     t.integer  "user_id"
     t.integer  "group_id"
     t.string   "role"
-    t.datetime "created_at",         :null => false
-    t.datetime "updated_at",         :null => false
+    t.datetime "created_at",                              :null => false
+    t.datetime "updated_at",                              :null => false
     t.string   "invitation_email"
     t.string   "token"
     t.integer  "invited_by_user_id"
+    t.boolean  "notifications_enabled", :default => true
   end
 
   add_index "memberships", ["user_id", "group_id"], :name => "index_group_users_on_user_id_and_group_id"
@@ -91,6 +92,7 @@ ActiveRecord::Schema.define(:version => 20140308064726) do
     t.datetime "updated_at",      :null => false
     t.string   "url"
     t.string   "avatar_url"
+    t.text     "description"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email"

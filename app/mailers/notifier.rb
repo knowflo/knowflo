@@ -1,5 +1,11 @@
 class Notifier < ActionMailer::Base
-  default from: Settings.reply_email
+  include SendGrid
+
+  sendgrid_category :use_subject_lines
+
+  default reply_to: Settings.reply_email,
+    return_path: Settings.reply_email,
+    from: Settings.reply_email
 
   def group_invitation(membership_id)
     @membership = Membership.find(membership_id)
@@ -10,25 +16,23 @@ class Notifier < ActionMailer::Base
          subject: "[#{Settings.app_name}] You've been invited to the #{@membership.group.name} group")
   end
 
-  def new_answer(question_id, user_id)
+  def new_question(question_id)
     @question = Question.find(question_id)
-    @user = User.find(user_id)
+    @user = @question.user
 
-    mail(to: @user.email, subject: "[#{Settings.app_name}] New answer for '#{@question.subject}'")
-  end
-
-  def new_question(question_id, user_id)
-    @question = Question.find(question_id)
-    @user = User.find(user_id)
+    sendgrid_recipients @question.group.following_users.map(&:email)
 
     mail(to: @user.email, subject: "[#{Settings.app_name}] New question for you: '#{@question.subject}'")
   end
 
-  def new_comment(question_id, user_id)
-    @question = Question.find(question_id)
-    @user = User.find(user_id)
+  def new_answer(answer_id)
+    @answer = Answer.find(answer_id)
+    @question = @answer.question
+    @user = @question.user
 
-    mail(to: @user.email, subject: "[#{Settings.app_name}] New comment for '#{@question.subject}'")
+    sendgrid_recipients @question.following_users.map(&:email)
+
+    mail(to: @question.user.email, subject: "[#{Settings.app_name}] New answer for '#{@question.subject}'")
   end
 
 end

@@ -4,6 +4,7 @@ Knowflo::Application.routes.draw do
   match 'login'          => 'sessions#new',     :as => :login
   match 'logout'         => 'sessions#destroy', :as => :logout
   match 'signup'         => 'users#new',        :as => :signup
+  match 'settings'       => 'users#settings',   :as => :settings
 
   match '/auth/:provider/callback', :to => 'sessions#create'
   match '/auth/failure',            :to => 'sessions#failure'

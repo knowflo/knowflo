@@ -1,0 +1,8 @@
+There's a new answer to the question "<%= @question.group.name %>"
+
+<%= @answer.user.name %> wrote:
+
+"<%= @answer.body %>"
+
+You can get involved in the conversation by visiting <%= group_question_url(@question.group, @question) %>.
+Or if you'd prefer to stop receiving emails like this, you can unfollow the question from that page also.

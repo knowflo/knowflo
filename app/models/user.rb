@@ -29,6 +29,8 @@ class User < ActiveRecord::Base
 
   before_validation :generate_tokens, :on => :create
 
+  accepts_nested_attributes_for :memberships
+
   def self.authenticate(email, password)
     if user = find_by_email(email)
       user.authenticate(password)

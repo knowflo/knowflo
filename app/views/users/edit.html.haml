@@ -1,0 +1,48 @@
+%header.page-header.subhead
+  %h1= @user.name
+  %p.lead Profile Settings
+
+.row
+  .col-md-8
+    = simple_form_for(@user) do |f|
+      .form-box
+        .form-group
+          = f.input(:first_name)
+          = f.input(:last_name)
+          = f.input(:email, placeholder: 'Your email address')
+          = f.input(:description, placeholder: 'Tell us a little about yourself', input_html: { rows: 3 })
+
+      %h4.form-box-label Password Management
+      .form-box
+        .form-group
+          = f.input(:password)
+          = f.input(:password_confirmation)
+
+      %h4.form-box-label Group Notification Settings
+      .form-box
+        .form-group.group-settings
+          %table{style: "width: 100%;"}
+            %thead
+              %tr
+                %th Group Name
+                %th Group Status
+                %th Receive Notifications?
+            %tbody
+              = f.simple_fields_for(:memberships, @user.memberships) do |m|
+                %tr
+                  %td= link_to(m.object.group.name, group_root_url(m.object.group))
+                  %td= m.object.group.privacy
+                  %td= m.input(:notifications_enabled, as: :boolean, label: false)
+
+      .form-actions
+        %button.btn.btn-primary{type: 'submit'} Update Settings
+        %a.btn.btn-default{href: user_path(current_user)} Cancel
+    .clear
+
+  .col-md-4.rightsidebar
+    = default_sidebar
+
+:css
+  .form-box-label {
+    margin-top: 20px;
+  }

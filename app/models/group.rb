@@ -6,6 +6,10 @@ class Group < ActiveRecord::Base
 
   has_many :memberships, :dependent => :destroy
   has_many :users, :through => :memberships
+  has_many :following_users, through: :memberships,
+    class_name: 'User', source: :user,
+    conditions: ['memberships.notifications_enabled = ?', true]
+
   has_many :questions, :dependent => :destroy
   has_many :answers, :through => :questions
 

@@ -1,5 +1,8 @@
 %header.page-header.subhead
-  %h1= @user.name
+  %h1
+    = @user.name
+    - if logged_in? && current_user == @user
+      %a{href: edit_user_path(@user), class: 'btn btn-default'} Edit Profile
   %p.lead is using Knowflo
 
 .row
@@ -9,11 +12,16 @@
         = image_tag(@user.avatar_url(64), :width => 64, :height => 64)
       .description
         - if logged_in? && current_user == @user
-          You haven't filled out any personal information yet. We'll give you the ability to do that soon.
-          You also need to be able to edit your photo. Also coming soon. Promise!
+          - if @user.description.present?
+            = @user.description
+          - else
+            You haven't filled out any personal information yet.
         - else
-          %span= @user.first_name
-          hasn't filled out any personal information yet. Check back soon!
+          - if @user.description.present?
+            = @user.description
+          - else
+            %span= @user.first_name
+            hasn't filled out any personal information yet. Check back soon!
     .clear
 
     %h3= mine_or_yours(@user, 'Groups')
