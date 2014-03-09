@@ -1,6 +1,6 @@
 class QuestionsController < ApplicationController
   before_filter :find_group,     :except => [:new]
-  before_filter :find_question,  :only   => [:show, :update, :destroy]
+  before_filter :find_question,  :only   => [:show, :update, :destroy, :follow, :unfollow]
   before_filter :login_required, :except => [:show]
   before_filter :owner_required, :only   => [:update, :destroy]
 
@@ -45,6 +45,20 @@ class QuestionsController < ApplicationController
     @question.destroy
     flash[:success] = "That question won't be bothering you any more."
     redirect_to(group_root_url(@group))
+  end
+
+  def follow
+    @following = @question.followings.find_or_create_by_user_id(current_user.id)
+    flash[:success] = "You are now following this question and will be notified when it's updated."
+    redirect_to(question_url(@question, subdomain: @group))
+  end
+
+  def unfollow
+    if @following = @question.followings.where(user_id: current_user.id).first
+      @following.destroy
+    end
+    flash[:success] = "You will no longer receive notifications about this question."
+    redirect_to(question_url(@question, subdomain: @group))
   end
 
   private

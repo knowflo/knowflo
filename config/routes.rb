@@ -17,25 +17,28 @@ Knowflo::Application.routes.draw do
   match '/ohshit',        :to => 'static#test_error', :as => :test_error
 
   constraints(Subdomain) do
-    match '/', :to => 'groups#show'
+    match '/', to: 'groups#show'
     resources :questions
     resources :memberships do
-      get :accept, :on => :member
+      get :accept, on: :member
     end
   end
 
-  resources :sessions,   :only => [:new, :create, :destroy]
+  resources :sessions, only: [:new, :create, :destroy]
   resources :users
   resources :questions
   resources :groups do
-    resources :questions
+    resources :questions do
+      post :follow, on: :member
+      post :unfollow, on: :member
+    end
     resources :answers do
-      post :vote, :on => :member
-      post :mark, :on => :member
+      post :vote, on: :member
+      post :mark, on: :member
     end
     resources :comments
     resources :memberships do
-      get :accept, :on => :member
+      get :accept, on: :member
     end
   end
 

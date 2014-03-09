@@ -135,6 +135,17 @@
           %span to participate.
 
   .col-md-4.rightsidebar
+    - if current_user_following?(@question)
+      %ul.unstyled.other
+        %li
+          = form_tag(unfollow_group_question_path(@group, @question)) do
+            %button.btn.btn-warning{type: 'submit'} Unfollow question
+    - elsif logged_in?
+      %ul.unstyled.other
+        %li
+          = form_tag(follow_group_question_path(@group, @question)) do
+            %button.btn.btn-info{type: 'submit'} Follow question
+
     - if owner_logged_in?(@question)
       %ul.unstyled.other
         %li

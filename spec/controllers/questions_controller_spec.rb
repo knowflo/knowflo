@@ -180,4 +180,68 @@ describe QuestionsController do
       response.should redirect_to(group_root_url(@question.group))
     end
   end
+
+  describe 'follow' do
+    let(:question) { FactoryGirl.create(:question) }
+    let(:user) { FactoryGirl.create(:user) }
+
+    before(:each) do
+      login(user)
+    end
+
+    it 'requires login' do
+      expect { post :follow, group_id: question.group, id: question }.to require_login
+    end
+
+    it 'adds a following to the question for the current user' do
+      post :follow, group_id: question.group, id: question
+      question.following_users.should include(user)
+    end
+
+    it 'redirects to the question page' do
+      post :follow, group_id: question.group, id: question
+      flash[:success].should_not be_nil
+      response.should redirect_to(question_url(question, subdomain: question.group))
+    end
+
+    it 'has no effect if the user is already following' do
+      FactoryGirl.create(:following, question: question, user: user)
+      expect {
+        post :follow, group_id: question.group, id: question
+      }.to_not change(Following, :count)
+    end
+  end
+
+  describe 'unfollow' do
+    let(:question) { FactoryGirl.create(:question) }
+    let(:user) { FactoryGirl.create(:user) }
+
+    before(:each) do
+      FactoryGirl.create(:following, question: question, user: user)
+      login(user)
+    end
+
+    it 'requires login' do
+      expect { post :unfollow, group_id: question.group, id: question }.to require_login
+    end
+
+    it 'removes the user from the list of users following the question' do
+      post :unfollow, group_id: question.group, id: question
+      question.following_users.should_not include(user)
+    end
+
+    it 'redirects to the question page' do
+      post :unfollow, group_id: question.group, id: question
+      flash[:success].should_not be_nil
+      response.should redirect_to(question_url(question, subdomain: question.group))
+    end
+
+    it 'has no effect if the user is not already following' do
+      Following.delete_all
+
+      expect {
+        post :unfollow, group_id: question.group, id: question
+      }.to_not change(Following, :count)
+    end
+  end
 end

@@ -67,6 +67,10 @@ module ApplicationHelper
     logged_in? && obj.try(:user) == current_user
   end
 
+  def current_user_following?(obj)
+    logged_in? && obj.try(:following_users).include?(current_user)
+  end
+
   def default_sidebar
     render('groups/sidebar', :base => logged_in? ? Question.visible(current_user) : Question.public_questions, :new_path => logged_in? ? new_question_path : nil)
   end
