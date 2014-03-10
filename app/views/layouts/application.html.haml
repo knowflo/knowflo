@@ -71,8 +71,8 @@
                 %li= link_to('Terms of Service', terms_url(:subdomain => false))
                 %li= link_to('Privacy Policy', privacy_url(:subdomain => false))
             %p
-              = "#{Settings.app_name} is a simple way to ask and answer questions."
-              On the Internet.
+              %strong= Settings.app_name
+              is a simple way to ask and answer questions. On the Internet.
             %p
               It isn't rocket science.
               %strong
