@@ -9,7 +9,7 @@ if defined?(Bundler)
   # Bundler.require(:default, :assets, Rails.env)
 end
 
-module Knowflo
+module Knowflow
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
@@ -57,6 +57,6 @@ module Knowflo
     config.assets.version = '1.0'
 
     # ActionMailer defaults
-    config.action_mailer.default_url_options = { :host => "knowflo.info" }
+    config.action_mailer.default_url_options = { :host => "knowflow.info" }
   end
 end

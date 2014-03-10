@@ -1,10 +1,10 @@
 default = Configuration.for('default') do
-  app_name 'knowflo'
-  app_url 'knowflo.info'
+  app_name 'knowflow'
+  app_url 'knowflow.info'
 
-  exception_sender 'errors@knowflo.info'
+  exception_sender 'errors@knowflow.info'
   admin_emails ['nap@zerosum.org']
-  reply_email 'reply@knowflo.info'
+  reply_email 'reply@knowflow.info'
 
   facebook_app_id 'facebook app id'
   facebook_app_secret 'facebook app secret'

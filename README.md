@@ -15,11 +15,21 @@ that the public test group may be cleaned out from time to time.
 
 ## Configuration
 
-You'll want to configure the Facebook and Algolia integrations (or disable
-those components). If you're deploying on Heroku you can set these as
-environment variables. See <code>config/settings/default.rb</code> for
-app-specific configuration settings. You'll also want to configure the
-mailer; out of the box it looks for <code>SENDGRID_USERNAME</code> and <code>SENDGRID_PASSWORD</code>.
+Generate a secret for the cookie sessions using `rake secret` and add it to
+your `.env` file like this:
+
+    echo "SECRET_TOKEN: `rake secret`" >> .env
+
+If you're deploying a production version of the site you'll want this value in
+your ENV settings.
+
+You'll need to configure the Facebook and Algolia integrations (or disable
+those components). There are environment variables for these as well.
+See `config/settings/default.rb` for the appropriate configuration value names.
+
+Finally, you'll also need to configure the mailer. Out of hte box it looks for
+`SENDGRID_USERNAME` and `SENDGRID_PASSWORD`. This will hopefully be more
+flexible in the future.
 
 ## Note on Patches / Pull Requests
 

@@ -4,4 +4,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-Knowflo::Application.load_tasks
+Knowflow::Application.load_tasks

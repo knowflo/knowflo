@@ -45,7 +45,7 @@ SimpleAdmin.setup do |config|
   # The +site_title+ is displayed in the header of admin pages. If empty
   # this value defaults to +Rails.application.class.parent_name.titleize+:
   #
-  config.site_title = "Knowflo"
+  config.site_title = "Knowflow"
 
 
   # The +default_per_page+ value allows you to control how many results

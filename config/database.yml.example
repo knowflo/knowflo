@@ -9,7 +9,7 @@ development: &default
   host: localhost
   username: postgres
   password:
-  database: knowflo_development
+  database: knowflow_development
   min_message: warning
   pool: 5
   timeout: 5000
@@ -19,8 +19,8 @@ development: &default
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: knowflo_test
+  database: knowflow_test
 
 production:
   <<: *default
-  database: knowflo_production
+  database: knowflow_production

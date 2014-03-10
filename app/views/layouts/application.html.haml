@@ -16,7 +16,7 @@
     %header.navbar.navbar-inverse.navbar-fixed-top
       .container
         .navbar-header
-          %a.navbar-brand{href: root_url(subdomain: false)} knowflo
+          %a.navbar-brand{href: root_url(subdomain: false)}= Settings.app_name
 
         %nav{role: 'navigation'}
           %ul.nav.navbar-nav.mainnav
@@ -44,7 +44,7 @@
                   = image_tag(@group.logo_url, :width => 120, :height => 120)
               - else
                 = link_to(root_url(:subdomain => false), :class => 'logo') do
-                  = image_tag(asset_path('knowflo_logo_120.png'), :width => 120, :height => 120)
+                  = image_tag(asset_path('knowflow_logo_120.png'), :width => 120, :height => 120)
               %ul.nav.nav-pills.nav-stacked
                 - if logged_in?
                   %li= link_to('My Account', user_path(current_user))
@@ -71,7 +71,7 @@
                 %li= link_to('Terms of Service', terms_url(:subdomain => false))
                 %li= link_to('Privacy Policy', privacy_url(:subdomain => false))
             %p
-              knowflo is a simple way to ask and answer questions.
+              = "#{Settings.app_name} is a simple way to ask and answer questions."
               On the Internet.
             %p
               It isn't rocket science.

@@ -1,4 +1,4 @@
-Knowflo::Application.routes.draw do
+Knowflow::Application.routes.draw do
   mount SimpleAdmin::Engine => '/admin', :as => 'simple_admin'
 
   match 'login'          => 'sessions#new',     :as => :login
