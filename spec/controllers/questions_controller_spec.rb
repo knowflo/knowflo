@@ -64,6 +64,8 @@ describe QuestionsController do
       end
 
       it 'sends email alerts' do
+        FactoryGirl.create(:membership, group: @group)
+
         expect {
           post :create, @params
         }.to change(ActionMailer::Base.deliveries, :count)

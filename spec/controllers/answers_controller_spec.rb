@@ -40,6 +40,7 @@ describe AnswersController do
       end
 
       it 'sends email alerts' do
+        FactoryGirl.create(:following, question: @question)
         expect {
           post :create, @params
         }.to change(ActionMailer::Base.deliveries, :count)

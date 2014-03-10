@@ -12,7 +12,7 @@ class AnswersController < ApplicationController
     if @answer.save
       @membership = @group.memberships.find_or_create_by_user_id(current_user.id)
       @following = @question.followings.find_or_create_by_user_id(current_user.id)
-      Notifier.new_answer(@answer.id, current_user).deliver
+      Notifier.new_answer(@answer.id, current_user).deliver if @question.following_users.length > 1
       flash[:success] = "Damn you're smart. And good looking, too. Thanks for adding your answer!"
       redirect_to(question_url(@question, :subdomain => @group))
     else
