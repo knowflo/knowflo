@@ -4,11 +4,11 @@ Hey there,
 <%= @group.welcome_message %>
 <% else %>
 <% if @membership.invited_by_user %>
-<%= @membership.invited_by_user.name %> has invited you to the group <%= @membership.group.name %> on Knowflo.
+<%= @membership.invited_by_user.name %> has invited you to the group <%= @membership.group.name %> on Knowflow.
 <% else %>
-You've been invited to the group <%= @membership.group.name %> on Knowflo.
+You've been invited to the group <%= @membership.group.name %> on Knowflow.
 <% end %>
-Knowflo is an easy way to ask and answer questions with a group of your peers. We hope you find it useful!
+Knowflow is an easy way to ask and answer questions with a group of your peers. We hope you find it useful!
 <% end %>
 
 To accept this invitation and join the <%= @membership.group.name %> group, just follow this link:
