@@ -13,6 +13,9 @@ default = Configuration.for('default') do
   algolia_api_key 'algolia read-write api key'
   algolia_search_key 'algolia read-only api key'
   algolia_index_name 'Question_production'
+
+  ga_account ''
+  ga_domain ''
 end
 
 Configuration.for('development', default) do

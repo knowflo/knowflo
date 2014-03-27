@@ -85,4 +85,4 @@
     = javascript_include_tag "application"
     = yield :javascript
 
-    = render :partial => 'shared/analytics' if Rails.env.production?
+    = render :partial => 'shared/analytics' if Rails.env.production? && Settings.ga_account.present?
