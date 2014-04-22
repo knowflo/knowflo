@@ -10,7 +10,7 @@ to accept pull requests? :)
 ## Public Server
 
 There's a public hosted version of Knowflow running on
-[Heroku](http://knowflo.info) that you can try out if you like. Note
+[Heroku](http://knowflow.info) that you can try out if you like. Note
 that the public test group may be cleaned out from time to time.
 
 ## Configuration
