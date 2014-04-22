@@ -1,6 +1,6 @@
-# Knowflo
+# Knowflow
 
-Knowflo is a super basic Q&A platform for public and private groups. It
+Knowflow is a super basic Q&A platform for public and private groups. It
 was developed (in a hurry!) to facilitate knowledge sharing for a couple
 small communities.
 
@@ -9,7 +9,7 @@ to accept pull requests? :)
 
 ## Public Server
 
-There's a public hosted version of Knowflo running on
+There's a public hosted version of Knowflow running on
 [Heroku](http://knowflo.info) that you can try out if you like. Note
 that the public test group may be cleaned out from time to time.
 
